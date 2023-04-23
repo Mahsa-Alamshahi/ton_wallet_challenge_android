@@ -33,6 +33,8 @@ import com.ton_blockchain.ton_wallet_challenge.R
 @Composable
 fun BalanceView() {
 
+
+
     Column {
 
         Row(
@@ -69,11 +71,16 @@ fun BalanceView() {
                 Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Settings,
-                    modifier = Modifier.padding(end = 8.dp),
-                    contentDescription = "", tint = Color.White
-                )
+                // LottieAnimation
+                // Pass the composition and the progress state
+//                LottieAnimation(
+//                    composition,
+//                    progress,
+//                    modifier = Modifier.size(400.dp)
+//                )
+
+                AnimationLoader(R.raw.wallet_egg, 36.dp
+                    ,36.dp)
 
                 Text(
                     text = "5633.225222",

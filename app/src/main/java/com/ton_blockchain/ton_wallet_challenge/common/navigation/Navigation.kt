@@ -4,17 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.WalletScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = TonWalletScreens.MainScreen.route) {
+    NavHost(navController = navController, startDestination = TonWalletScreens.WalletScreen.route) {
 //        composable(route = TonWalletScreens.WalletScreen.route) {
 //            WalletScreen(navController = navController)
 //        }
-        composable(route = TonWalletScreens.MainScreen.route) {
-            MainScreen(navController = navController)
+        composable(route = TonWalletScreens.WalletScreen.route) {
+            WalletScreen(navController = navController)
         }
     }
 }
