@@ -29,7 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ton_blockchain.ton_wallet_challenge.R
-import com.ton_blockchain.ton_wallet_challenge.common.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 
 @Composable
 fun BalanceView() {

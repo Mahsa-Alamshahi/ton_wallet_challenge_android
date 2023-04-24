@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.Navigation
-import com.ton_blockchain.ton_wallet_challenge.common.theme.Ton_wallet_challengeTheme
+import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Ton_wallet_challengeTheme
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.WalletScreen
 
 

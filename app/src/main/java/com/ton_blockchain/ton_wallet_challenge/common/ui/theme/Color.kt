@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.common.theme
+package com.ton_blockchain.ton_wallet_challenge.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

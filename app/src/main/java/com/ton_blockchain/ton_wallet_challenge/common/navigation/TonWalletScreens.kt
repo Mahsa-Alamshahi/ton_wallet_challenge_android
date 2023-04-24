@@ -4,5 +4,6 @@ sealed class TonWalletScreens(val route: String) {
     object WalletScreen : TonWalletScreens("wallet_screen")
     object MainScreen : TonWalletScreens("main_screen")
     object RecoveryPhraseScreen : TonWalletScreens("recovery_phrase_screen")
+    object TestPhraseScreen : TonWalletScreens("test_phrase_screen")
 }
 
