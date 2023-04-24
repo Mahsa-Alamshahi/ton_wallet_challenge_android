@@ -9,13 +9,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieAnimatable
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
-fun AnimationLoader(resId: Int, width: Dp, height: Dp, alignment: Alignment = Alignment.Center,
+fun AnimationLoader(resId: Int, width: Dp = 100.dp, height: Dp = 100.dp, alignment: Alignment = Alignment.Center,
                     enableMergePaths: Boolean = true,){
 
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(resId))

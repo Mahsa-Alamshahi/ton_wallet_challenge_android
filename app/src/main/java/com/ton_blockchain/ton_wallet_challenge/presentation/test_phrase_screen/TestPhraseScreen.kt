@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -31,45 +30,42 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
 @Composable
 fun TestPhraseScreen(navController: NavController) {
-//    val kc = LocalSoftwareKeyboardController.current
 
     val textState = remember { mutableStateOf(TextFieldValue()) }
-//    var text by remember { mutableStateOf("") }
-//    var result by remember { mutableStateOf("") }
-//    val callback = {
-//        result = try {
-//            val num = text.toFloat()
-//            num.pow(2.0F).toString()
-//        } catch (ex: NumberFormatException) {
-//            ""
-//        }
-//        kc?.hide()
-//    }
 
     Scaffold(
         topBar = {
             Row {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .clickable {
-                        }
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        tint = Blue80,
+                        contentDescription = stringResource(R.string.back),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .clickable {
+                                navController.navigateUp()
+                            }
+                    )
+                    TextComponent(
+                        text = stringResource(id = R.string.back),
+                        modifier = Modifier.padding(4.dp), textColor = Blue80
+                    )
+                }
             }
         }
     ) { paddingValues ->
+
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -78,82 +74,80 @@ fun TestPhraseScreen(navController: NavController) {
         ) {
 
             AnimationLoader(
-                resId = R.raw.wallet_science, width = 128.dp,
-                height = 128.dp
+                resId = R.raw.wallet_science
             )
-            Text(
+
+            TextComponent(
                 text = stringResource(R.string.test_phrase_title),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 12.dp, top = 12.dp)
-            )
-            Text(
-                text = stringResource(R.string.test_phrase_content),
-                fontSize = 14.sp, fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Center,
-                style = LocalTextStyle.current.copy(lineHeight = 18.sp),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(8.dp)
             )
 
-            TextField(
-                value = textState.value,
-                modifier = Modifier.padding(8.dp),
-                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
-                label = {
-                    Text("Text field 1")
-                },
-                        keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-//                    callback()
-                }
-            ),
-            )
-            TextField(
-                value = textState.value,
-                modifier = Modifier.padding(8.dp),
-                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
-                label = {
-                    Text("Text field 1")
-                },
-                        keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-//                    callback()
-                }
-            ),
-            )
-            TextField(
-                value = textState.value,
-                modifier = Modifier.padding(8.dp),
-                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
-                label = {
-                    Text("Text field 1")
-                },
-                        keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-//                    callback()
-                }
-            ),
+            TextComponent(
+                text = stringResource(R.string.test_phrase_content),
+                modifier = Modifier.padding(16.dp)
             )
 
 
+            TextField(
+                value = textState.value,
+                modifier = Modifier.padding(8.dp),
+                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
+                onValueChange = { textState.value = it },
+                label = {
+                    Text("Text field 1")
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+//                    callback()
+                    }
+                ),
+            )
+            TextField(
+                value = textState.value,
+                modifier = Modifier.padding(8.dp),
+                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
+                onValueChange = { textState.value = it },
+                label = {
+                    Text("Text field 1")
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+//                    callback()
+                    }
+                ),
+            )
+            TextField(
+                value = textState.value,
+                modifier = Modifier.padding(8.dp),
+                textStyle = TextStyle.Default.copy(fontSize = 16.sp),
+                onValueChange = { textState.value = it },
+                label = {
+                    Text("Text field 1")
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+//                    callback()
+                    }
+                ),
+            )
 
             Button(
                 onClick = {
+                    navController.navigate("main_screen")
                 },
                 Modifier
                     .padding(top = 16.dp, start = 32.dp, end = 32.dp, bottom = 16.dp)

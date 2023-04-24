@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,13 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
@@ -43,33 +41,24 @@ fun WalletScreen(navController: NavController) {
         ) {
 
 
-
-
         Column(
             Modifier.weight(2f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            AnimationLoader(resId = (R.raw.wallet_crystal), width = 94.dp ,
-                height = 94.dp)
+            AnimationLoader(
+                resId = (R.raw.wallet_crystal))
 
-            Text(
+            TextComponent(
                 text = stringResource(R.string.wallet_screen_title),
-                color = Color.Black,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold,
-                fontStyle = FontStyle.Normal,
-                modifier = Modifier.padding(0.dp),
+                modifier = Modifier.padding(0.dp)
             )
-
-            Text(
+            TextComponent(
                 text = stringResource(R.string.wallet_screen_content),
-                color = Color.Black,
-                fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Center,
-                style = LocalTextStyle.current.copy(lineHeight = 18.sp),
-                fontSize = 14.sp, modifier = Modifier.padding(top = 12.dp, start= 4.dp, end = 4.dp)
+                modifier = Modifier.padding(top = 12.dp, start = 4.dp, end = 4.dp)
             )
         }
 
@@ -80,9 +69,11 @@ fun WalletScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                          navController.navigate("recovery_phrase_screen")
+                    navController.navigate("recovery_phrase_screen")
                 },
-                Modifier.padding(top = 2.dp, start = 32.dp, end = 32.dp).fillMaxWidth(1f),
+                Modifier
+                    .padding(top = 2.dp, start = 32.dp, end = 32.dp)
+                    .fillMaxWidth(1f),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Blue80,
                     contentColor = Color.White
@@ -108,8 +99,6 @@ fun WalletScreen(navController: NavController) {
                     maxLines = 1
                 )
             }
-
-
         }
     }
 }

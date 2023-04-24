@@ -33,9 +33,7 @@ fun MainScreen(navController: NavHostController) {
             Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .background(Color.Black),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
+                .background(Color.Black)
         ) {
             BalanceView()
         }
@@ -45,7 +43,6 @@ fun MainScreen(navController: NavHostController) {
                 .weight(1.3f)
                 .fillMaxWidth()
                 .background(Color.White),
-//            verticalArrangement = Arrangement.Start,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
