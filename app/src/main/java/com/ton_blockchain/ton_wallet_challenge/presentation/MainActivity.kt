@@ -9,8 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.Navigation
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Ton_wallet_challengeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
