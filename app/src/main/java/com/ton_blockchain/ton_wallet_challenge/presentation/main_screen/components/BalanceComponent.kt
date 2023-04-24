@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.theme.Blue80
 
 @Composable
 fun BalanceView() {
@@ -69,27 +70,18 @@ fun BalanceView() {
 
             Row(
                 Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // LottieAnimation
-                // Pass the composition and the progress state
-//                LottieAnimation(
-//                    composition,
-//                    progress,
-//                    modifier = Modifier.size(400.dp)
-//                )
-
-                AnimationLoader(R.raw.wallet_egg, 36.dp
+                AnimationLoader(R.raw.wallet_crystal, 36.dp
                     ,36.dp)
 
                 Text(
                     text = "5633.225222",
                     textAlign = TextAlign.Center, color = Color.White,
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp
+                    fontSize = 32.sp
                 )
-
-
             }
         }
 
@@ -103,13 +95,12 @@ fun BalanceView() {
                 onClick = { },
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 4.dp, end = 2.dp),
+                    .padding(start = 8.dp, end = 4.dp),
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(1.dp, Color.Blue),
-//                contentPadding = PaddingValues(),
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color.White,
-                    containerColor = Color.Blue
+                    containerColor = Blue80
                 )
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -127,12 +118,12 @@ fun BalanceView() {
                 onClick = { },
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 2.dp, end = 4.dp),
+                    .padding(start = 4.dp, end = 8.dp),
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(1.dp, Color.Blue),
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color.White,
-                    containerColor = Color.Blue
+                    containerColor = Blue80
                 )
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
