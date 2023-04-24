@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -81,13 +82,13 @@ fun TestPhraseScreen(navController: NavController) {
                 height = 128.dp
             )
             Text(
-                text = "Test Time!",
+                text = stringResource(R.string.test_phrase_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 12.dp, top = 12.dp)
             )
             Text(
-                text = "Let's check that you wrote them down correctly. Please enter the words and ",
+                text = stringResource(R.string.test_phrase_content),
                 fontSize = 14.sp, fontWeight = FontWeight.Normal,
                 textAlign = TextAlign.Center,
                 style = LocalTextStyle.current.copy(lineHeight = 18.sp),
@@ -164,7 +165,7 @@ fun TestPhraseScreen(navController: NavController) {
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Text(
-                    text = "Continue",
+                    text = stringResource(R.string.continue_btn),
                     color = Color.White,
                     fontWeight = FontWeight.Normal,
                     fontSize = 12.sp

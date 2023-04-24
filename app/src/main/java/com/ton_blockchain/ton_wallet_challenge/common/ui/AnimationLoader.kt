@@ -21,18 +21,19 @@ fun AnimationLoader(resId: Int, width: Dp, height: Dp, alignment: Alignment = Al
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(resId))
     val shouldReverse = remember { mutableStateOf(false) }
     val anim = rememberLottieAnimatable()
+
     if (shouldReverse.value.not())
         LaunchedEffect(composition) {
             anim.animate(composition = composition, speed = 1f)
             shouldReverse.value = true
         }
+
     if (shouldReverse.value) {
         LaunchedEffect(composition) {
             anim.animate(composition = composition, speed = -1f)
             shouldReverse.value = false
         }
     }
-
 
     LottieAnimation(
         composition,

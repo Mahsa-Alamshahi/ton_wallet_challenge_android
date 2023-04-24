@@ -2,4 +2,15 @@
     <string name="app_name">ton_wallet_challenge</string>
     <string name="recovery_phrase_title">Your Recovery Phrase</string>
     <string name="recovery_phrase_content">Write down these 24 words in this exact order and keep them in a secure place. Do not share this list with anyone. If you lose it, you will irrevocably lose access to your TON account.</string>
+    <string name="wallet_screen_content">TON wallet allows you to make fast and secure blockchain-based payments without intermediaries.</string>
+    <string name="wallet_screen_title">TON Wallet</string>
+    <string name="create_my_wallet">Create My Wallet</string>
+    <string name="import_existing_wallet">Import Existing Wallet</string>
+    <string name="test_phrase_title">Test Time!</string>
+    <string name="test_phrase_content">"Let's check that you wrote them down correctly. Please enter the words and "</string>
+    <string name="continue_btn">Continue</string>
+    <string name="done">Done</string>
+    <string name="back">Back</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
 </resources>

@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -54,7 +55,7 @@ fun WalletScreen(navController: NavController) {
                 height = 94.dp)
 
             Text(
-                text = "TON Wallet",
+                text = stringResource(R.string.wallet_screen_title),
                 color = Color.Black,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -63,7 +64,7 @@ fun WalletScreen(navController: NavController) {
             )
 
             Text(
-                text = "TON wallet allows you to make fast and secure blockchain-based payments without intermediaries.",
+                text = stringResource(R.string.wallet_screen_content),
                 color = Color.Black,
                 fontWeight = FontWeight.Normal,
                 textAlign = TextAlign.Center,
@@ -89,7 +90,7 @@ fun WalletScreen(navController: NavController) {
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Text(
-                    text = "Create My Wallet",
+                    text = stringResource(R.string.create_my_wallet),
                     color = Color.White,
                     fontWeight = FontWeight.Normal,
                     fontSize = 12.sp
@@ -101,7 +102,7 @@ fun WalletScreen(navController: NavController) {
                 Modifier.padding(top = 16.dp, bottom = 32.dp)
             ) {
                 Text(
-                    "Import Existing Wallet",
+                    stringResource(R.string.import_existing_wallet),
                     color = Blue80,
                     fontSize = 16.sp,
                     maxLines = 1

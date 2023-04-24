@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,7 +46,7 @@ fun BalanceView() {
             Box(modifier = Modifier.padding(8.dp)) {
                 Image(painter = painterResource(id = R.drawable.baseline_qr_code_scanner_24),
                     contentDescription = null,
-                    modifier = Modifier.clickable { println("Button Clicked!") })
+                    modifier = Modifier.clickable { })
             }
             IconButton(onClick = {}) {
                 Icon(
@@ -109,7 +110,7 @@ fun BalanceView() {
                         contentDescription = ""
                     )
                     Spacer(modifier = Modifier.width(width = 8.dp))
-                    Text(text = "Recieve", fontSize = 14.sp)
+                    Text(text = stringResource(R.string.receive), fontSize = 14.sp)
                 }
             }
 
@@ -132,7 +133,7 @@ fun BalanceView() {
                         contentDescription = ""
                     )
                     Spacer(modifier = Modifier.width(width = 8.dp))
-                    Text(text = "Send", fontSize = 14.sp)
+                    Text(text = stringResource(R.string.send), fontSize = 14.sp)
                 }
             }
 

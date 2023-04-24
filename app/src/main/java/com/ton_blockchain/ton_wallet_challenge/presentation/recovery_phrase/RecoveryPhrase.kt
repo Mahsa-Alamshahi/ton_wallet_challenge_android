@@ -39,7 +39,7 @@ fun RecoveryPhraseScreen(navController: NavController) {
             Row {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back",
+                    contentDescription = stringResource(R.string.back),
                     modifier = Modifier
                         .padding(4.dp)
                         .clickable {
@@ -87,7 +87,7 @@ fun RecoveryPhraseScreen(navController: NavController) {
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Text(
-                    text = "Done",
+                    text = stringResource(R.string.done),
                     color = Color.White,
                     fontWeight = FontWeight.Normal,
                     fontSize = 12.sp
