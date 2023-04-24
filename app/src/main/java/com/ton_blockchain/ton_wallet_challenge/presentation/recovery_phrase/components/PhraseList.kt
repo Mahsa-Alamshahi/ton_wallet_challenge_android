@@ -15,51 +15,53 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-internal fun PhraseList(){
-
+internal fun PhraseList() {
+    var counter = 1
 
     repeat(10) {
-        Row(modifier = Modifier.padding(2.dp).fillMaxWidth()) {
+        Row(modifier = Modifier
+            .padding(2.dp)
+            .fillMaxWidth()) {
 
-
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-            modifier = Modifier
-                .padding(2.dp)
-                .weight(1f),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 8.dp,
-                pressedElevation = 2.dp,
-                focusedElevation = 4.dp
-            )
-        ) {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .padding(2.dp)
+                    .weight(1f),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 8.dp,
+                    pressedElevation = 2.dp,
+                    focusedElevation = 4.dp
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
 //                    horizontalArrangement = Arrangement.Start,
 //                    verticalAlignment = Alignment.CenterVertically
-            ) {
+                ) {
 
+                }
+                Text(
+                    text = counter++.toString(),
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.padding(2.dp)
+                )
+                Text(
+                    text = "Word List",
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 12.sp,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(2.dp)
+                )
             }
-            Text(
-                text = "index.toString()",
-                fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
-                color = Color.Gray,
-                textAlign = TextAlign.Start,
-                modifier = Modifier.padding(2.dp)
-            )
-            Text(
-                text = "Word List",
-                fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
-                color = Color.Black,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(2.dp)
-            )
-        }
 
 
             Card(
@@ -75,16 +77,17 @@ internal fun PhraseList(){
                     focusedElevation = 4.dp
                 )
             ) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp),
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
 //                    horizontalArrangement = Arrangement.Start,
 //                    verticalAlignment = Alignment.CenterVertically
                 ) {
 
                 }
                 Text(
-                    text = "index.toString()",
+                    text = counter++.toString(),
                     fontWeight = FontWeight.Normal,
                     fontSize = 12.sp,
                     color = Color.Gray,
