@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowRow
 import com.ton_blockchain.ton_wallet_challenge.R
@@ -32,7 +33,7 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.componen
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.components.PhraseList
 
 @Composable
-fun RecoveryPhraseScreen(navController: NavController) {
+fun RecoveryPhraseScreen(navController: NavController,  viewModel: RecoveryPhraseViewModel = hiltViewModel()) {
     Scaffold(
         topBar = {
             Row(verticalAlignment = Alignment.CenterVertically) {
