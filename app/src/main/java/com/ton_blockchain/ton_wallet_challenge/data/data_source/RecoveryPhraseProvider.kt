@@ -5,10 +5,16 @@ import cash.z.ecc.android.bip39.Mnemonics
 
 class RecoveryPhraseProvider {
 
-    fun generateRecoveryPhrase(){
+    fun generateRecoveryPhrase(): Map<Int, String> {
+        val recoveryPhraseMap = mutableMapOf<Int, String>()
         val mnemonicCode: Mnemonics.MnemonicCode = Mnemonics.MnemonicCode(Mnemonics.WordCount.COUNT_24)
+        var index: Int = 1
         for (word in mnemonicCode) {
-            println(word)
+            recoveryPhraseMap[index] = word
+            println("$index $word")
+            index++
         }
+
+        return recoveryPhraseMap
     }
 }
