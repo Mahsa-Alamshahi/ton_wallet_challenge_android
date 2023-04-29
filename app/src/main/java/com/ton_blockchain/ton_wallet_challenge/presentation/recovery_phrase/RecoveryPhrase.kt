@@ -1,5 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,11 +31,19 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
-import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.components.PhraseList
+import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.components.PhraseListComponent
+
 
 @Composable
-fun RecoveryPhraseScreen(navController: NavController,  viewModel: RecoveryPhraseViewModel = hiltViewModel()) {
+fun RecoveryPhraseScreen(
+    navController: NavController,
+    viewModel: RecoveryPhraseViewModel = hiltViewModel()
+) {
+
+    var phraseList: List<Pair<Int, String>> = remember { viewModel._state.toList() }
+
     Scaffold(
         topBar = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -47,8 +57,10 @@ fun RecoveryPhraseScreen(navController: NavController,  viewModel: RecoveryPhras
                             navController.navigateUp()
                         }
                 )
-                TextComponent(text = stringResource(id = R.string.back),
-                    modifier = Modifier.padding(4.dp), textColor = Blue80)
+                TextComponent(
+                    text = stringResource(id = R.string.back),
+                    modifier = Modifier.padding(4.dp), textColor = Blue80
+                )
             }
         }
     ) { paddingValues ->
@@ -74,12 +86,18 @@ fun RecoveryPhraseScreen(navController: NavController,  viewModel: RecoveryPhras
             )
 
             FlowRow(Modifier.padding(16.dp)) {
-                PhraseList()
+                PhraseListComponent(phraseList)
             }
 
             Button(
                 onClick = {
-                          navController.navigate("test_phrase_screen")
+                    val list = mutableListOf<Pair<Int, String>>()
+                    list.addAll(phraseList)
+                    var phraseListParcelable = PhraseList(list)
+
+                    Log.d("tagg", "$phraseListParcelable")
+                    navController.navigate("test_phrase_screen/$phraseListParcelable")
+
                 },
                 Modifier
                     .padding(32.dp)

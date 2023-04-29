@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 
 class RecoveryPhraseRepositoryImpl @Inject constructor(private val recoveryPhraseProvider: RecoveryPhraseProvider): RecoveryPhraseRepository  {
-    override fun generateRecoveryPhrase(): Map<Int, String> =
+    override fun generateRecoveryPhrase(): List<Pair<Int, String>> =
       recoveryPhraseProvider.generateRecoveryPhrase()
 
 

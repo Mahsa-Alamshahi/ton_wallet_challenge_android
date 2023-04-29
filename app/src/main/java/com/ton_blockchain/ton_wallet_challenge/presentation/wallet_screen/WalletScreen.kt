@@ -26,7 +26,6 @@ import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
-
 @Composable
 fun WalletScreen(navController: NavController) {
 
@@ -70,6 +69,7 @@ fun WalletScreen(navController: NavController) {
             Button(
                 onClick = {
                     navController.navigate("recovery_phrase_screen")
+
                 },
                 Modifier
                     .padding(top = 2.dp, start = 32.dp, end = 32.dp)
@@ -87,6 +87,7 @@ fun WalletScreen(navController: NavController) {
                     fontSize = 12.sp
                 )
             }
+
             TextButton(
                 onClick = {
                 },

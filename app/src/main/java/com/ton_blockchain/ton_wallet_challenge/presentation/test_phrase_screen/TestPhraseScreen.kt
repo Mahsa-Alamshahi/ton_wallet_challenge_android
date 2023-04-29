@@ -32,16 +32,20 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
 @Composable
-fun TestPhraseScreen(navController: NavController) {
+fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, viewModel: TestPhraseViewModel = hiltViewModel()) {
 
     val textState = remember { mutableStateOf(TextFieldValue()) }
+    val randomNumberList = remember{ viewModel.generateThreeRandomNumber()}
+
 
     Scaffold(
         topBar = {
@@ -96,7 +100,7 @@ fun TestPhraseScreen(navController: NavController) {
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
                 onValueChange = { textState.value = it },
                 label = {
-                    Text("Text field 1")
+                    Text("${randomNumberList[0]}")
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -114,7 +118,7 @@ fun TestPhraseScreen(navController: NavController) {
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
                 onValueChange = { textState.value = it },
                 label = {
-                    Text("Text field 1")
+                    Text("${randomNumberList[1]}")
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -132,7 +136,7 @@ fun TestPhraseScreen(navController: NavController) {
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
                 onValueChange = { textState.value = it },
                 label = {
-                    Text("Text field 1")
+                    Text("${randomNumberList[2]}")
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,

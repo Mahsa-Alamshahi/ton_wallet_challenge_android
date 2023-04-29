@@ -14,10 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-internal fun PhraseList() {
-    var counter = 1
-
-    repeat(10) {
+internal fun PhraseListComponent(phraseList: List<Pair<Int, String>>) {
+    var counter = 0
+    repeat(12) {
         Row(
             modifier = Modifier
                 .padding(start = 2.dp, end = 2.dp)
@@ -32,7 +31,7 @@ internal fun PhraseList() {
             ) {
 
                 Text(
-                    text = counter++.toString(),
+                    text = phraseList[counter].first.toString(),
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
                     color = Color.Gray,
@@ -40,7 +39,7 @@ internal fun PhraseList() {
                     modifier = Modifier.padding(2.dp)
                 )
                 Text(
-                    text = "Word List",
+                    text = phraseList[counter].second,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -56,8 +55,9 @@ internal fun PhraseList() {
                 horizontalArrangement = Arrangement.Start
             ) {
 
+                counter+= 1
                 Text(
-                    text = counter++.toString(),
+                    text =phraseList[counter].first.toString(),
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
                     color = Color.Gray,
@@ -65,7 +65,7 @@ internal fun PhraseList() {
                     modifier = Modifier.padding(2.dp)
                 )
                 Text(
-                    text = "Word List",
+                    text = phraseList[counter].second,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -74,5 +74,6 @@ internal fun PhraseList() {
                 )
             }
         }
+        counter+=1
     }
 }
