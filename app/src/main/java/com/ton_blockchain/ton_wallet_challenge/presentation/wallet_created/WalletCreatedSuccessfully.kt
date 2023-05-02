@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen
+package com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,8 +25,9 @@ import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
+
 @Composable
-fun WalletScreen(navController: NavController) {
+fun WalletCreatedSuccessfullyScreen(navController: NavController){
 
     Column(
         Modifier
@@ -47,16 +47,16 @@ fun WalletScreen(navController: NavController) {
         ) {
 
             AnimationLoader(
-                resId = (R.raw.wallet_crystal))
+                resId = (R.raw.wallet_congrats))
 
             TextComponent(
-                text = stringResource(R.string.wallet_screen_title),
+                text = stringResource(R.string.congratulations),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(0.dp)
             )
             TextComponent(
-                text = stringResource(R.string.wallet_screen_content),
+                text = stringResource(R.string.your_ton_wallet_has_just_been_created_only_you_control_it_to_be_able_to_always_have_access_to_it_please_write_down_secret_words_and_set_up_a_secure_passcode),
                 modifier = Modifier.padding(top = 12.dp, start = 4.dp, end = 4.dp)
             )
         }
@@ -68,7 +68,7 @@ fun WalletScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    navController.navigate("wallet_created_screen")
+                    navController.navigate("recovery_phrase_screen")
 
                 },
                 Modifier
@@ -81,28 +81,13 @@ fun WalletScreen(navController: NavController) {
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.create_my_wallet),
+                    text = stringResource(R.string.proceed),
                     color = Color.White,
                     fontWeight = FontWeight.Normal,
                     fontSize = 12.sp
                 )
             }
-
-            TextButton(
-                onClick = {
-                },
-                Modifier.padding(top = 16.dp, bottom = 32.dp)
-            ) {
-                Text(
-                    stringResource(R.string.import_existing_wallet),
-                    color = Blue80,
-                    fontSize = 16.sp,
-                    maxLines = 1
-                )
-            }
         }
     }
-
-
 
 }

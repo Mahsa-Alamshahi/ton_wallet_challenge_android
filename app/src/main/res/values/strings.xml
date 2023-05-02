@@ -13,4 +13,7 @@
     <string name="back">Back</string>
     <string name="send">Send</string>
     <string name="receive">Receive</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="your_ton_wallet_has_just_been_created_only_you_control_it_to_be_able_to_always_have_access_to_it_please_write_down_secret_words_and_set_up_a_secure_passcode">Your TON wallet has just been created. Only you control it. \n \n To be able to always have access to it, please write down secret words and set up a secure passcode.</string>
+    <string name="proceed">Proceed</string>
 </resources>

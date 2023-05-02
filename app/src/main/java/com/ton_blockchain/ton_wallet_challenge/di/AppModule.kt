@@ -2,6 +2,7 @@ package com.ton_blockchain.ton_wallet_challenge.di
 
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.DataProvider
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.RecoveryPhraseProvider
+import com.ton_blockchain.ton_wallet_challenge.data.data_source.WalletProvider
 import com.ton_blockchain.ton_wallet_challenge.data.repository.RecoveryPhraseRepositoryImpl
 import com.ton_blockchain.ton_wallet_challenge.data.repository.TestPhraseRepositoryImpl
 import com.ton_blockchain.ton_wallet_challenge.domain.repository.RecoveryPhraseRepository
@@ -31,4 +32,8 @@ object AppModule {
 
     @Provides
     fun provideDataProvider(): DataProvider = DataProvider()
+
+
+    @Provides
+    fun provideWalletProvider(): WalletProvider = WalletProvider()
 }

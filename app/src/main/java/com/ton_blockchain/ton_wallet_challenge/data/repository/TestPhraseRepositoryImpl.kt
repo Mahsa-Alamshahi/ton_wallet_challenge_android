@@ -5,8 +5,12 @@ import com.ton_blockchain.ton_wallet_challenge.domain.repository.TestPhraseRepos
 import javax.inject.Inject
 
 
-class TestPhraseRepositoryImpl @Inject constructor(private val dataProvider: DataProvider): TestPhraseRepository {
+class TestPhraseRepositoryImpl @Inject constructor(private val dataProvider: DataProvider) :
+    TestPhraseRepository {
 
     override fun generateRandomNumber(): List<Int> = dataProvider.generateRandomNumber()
-
+    override fun checkRandomPhrase(
+        phraseList: List<Pair<Int, String>>,
+        inputPhrase: MutableList<Pair<Int, String>>
+    ): Boolean = dataProvider.checkPhraseList(phraseList, inputPhrase)
 }

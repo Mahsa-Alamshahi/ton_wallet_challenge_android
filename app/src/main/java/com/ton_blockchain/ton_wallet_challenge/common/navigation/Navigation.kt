@@ -10,6 +10,7 @@ import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.RecoveryPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen.TestPhraseScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedSuccessfullyScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.WalletScreen
 
 @Composable
@@ -29,13 +30,13 @@ fun Navigation() {
 
 
         composable(
-            TonWalletScreens.TestPhraseScreen.route +"/{phraseList}",
-            arguments = listOf(navArgument("phraseList") {
+            TonWalletScreens.TestPhraseScreen.route +"/{phraseListArg}",
+            arguments = listOf(navArgument("phraseListArg") {
                 type = PhraseListArgType()
 
             })
         ) { navBackStackEntry ->
-            val phraseList = navBackStackEntry.arguments?.getString("phraseList")
+            val phraseList = navBackStackEntry.arguments?.getString("phraseListArg")
                 ?.let { Gson().fromJson(it, PhraseList::class.java) }
             TestPhraseScreen(navController, phraseList)
         }
@@ -44,6 +45,13 @@ fun Navigation() {
             route = TonWalletScreens.MainScreen.route
         ) { backStackEntry ->
             MainScreen(navController)
+        }
+
+
+        composable(
+            route = TonWalletScreens.WalletCreatedSuccessfullyScreen.route
+        ) { entry ->
+            WalletCreatedSuccessfullyScreen(navController)
         }
     }
 }

@@ -13,7 +13,6 @@ kapt {
 }
 
 
-
 android {
     namespace 'com.ton_blockchain.ton_wallet_challenge'
     compileSdk 33
@@ -68,7 +67,6 @@ android {
                 '-opt-in=androidx.compose.material3.ExperimentalMaterial3Api'
         ]
     }
-
 
 
 //    kotlin {
@@ -142,5 +140,8 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    implementation('org.bitcoinj:bitcoinj-core:0.16.2')
+
+    implementation "com.orhanobut:hawk:2.0.1"
 
 }

@@ -19,8 +19,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,7 +32,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,11 +43,18 @@ import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
 @Composable
-fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, viewModel: TestPhraseViewModel = hiltViewModel()) {
+fun TestPhraseScreen(
+    navController: NavController,
+    phraseList: PhraseList?,
+    viewModel: TestPhraseViewModel = hiltViewModel()
+) {
 
-    val textState = remember { mutableStateOf(TextFieldValue()) }
-    val randomNumberList = remember{ viewModel.generateThreeRandomNumber()}
+    var firstTextState by rememberSaveable { mutableStateOf("") }
+    var secondTextState by rememberSaveable { mutableStateOf("") }
+    var thirdTextState by rememberSaveable { mutableStateOf("") }
 
+    var inputPhraseList = remember{ mutableListOf<Pair<Int, String>>()}
+    val randomNumberList =  remember{viewModel.generateThreeRandomNumber()}
 
     Scaffold(
         topBar = {
@@ -95,10 +104,11 @@ fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, view
 
 
             TextField(
-                value = textState.value,
+                value = firstTextState,
                 modifier = Modifier.padding(8.dp),
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
+                onValueChange = { firstTextState = it
+                    },
                 label = {
                     Text("${randomNumberList[0]}")
                 },
@@ -113,10 +123,11 @@ fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, view
                 ),
             )
             TextField(
-                value = textState.value,
+                value = secondTextState,
                 modifier = Modifier.padding(8.dp),
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
+                onValueChange = { secondTextState = it
+                   },
                 label = {
                     Text("${randomNumberList[1]}")
                 },
@@ -131,10 +142,13 @@ fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, view
                 ),
             )
             TextField(
-                value = textState.value,
+                value = thirdTextState,
                 modifier = Modifier.padding(8.dp),
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
-                onValueChange = { textState.value = it },
+                onValueChange = {
+                    thirdTextState = it
+
+                                },
                 label = {
                     Text("${randomNumberList[2]}")
                 },
@@ -151,7 +165,14 @@ fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, view
 
             Button(
                 onClick = {
-                    navController.navigate("main_screen")
+                    inputPhraseList.add(0, Pair(randomNumberList[0], firstTextState))
+                    inputPhraseList.add(1,Pair(randomNumberList[1], secondTextState))
+                    inputPhraseList.add(2,Pair(randomNumberList[2], thirdTextState))
+                    if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
+                        navController.navigate("main_screen")
+                    } else {
+
+                    }
                 },
                 Modifier
                     .padding(top = 16.dp, start = 32.dp, end = 32.dp, bottom = 16.dp)
@@ -171,4 +192,6 @@ fun TestPhraseScreen(navController: NavController, phraseList: PhraseList?, view
             }
         }
     }
+
+
 }
