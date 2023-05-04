@@ -16,9 +16,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    fun provideRecoveryPhraseProvider(): RecoveryPhraseProvider = RecoveryPhraseProvider()
-
 
     @Provides
     fun provideRecoveryPhraseRepository(recoveryPhraseProvider: RecoveryPhraseProvider): RecoveryPhraseRepository =

@@ -5,11 +5,8 @@ import cash.z.ecc.android.bip39.toSeed
 import javax.inject.Inject
 
 
-class RecoveryPhraseProvider {
+class RecoveryPhraseProvider @Inject constructor(private var walletProvider: WalletProvider){
 
-
-    @Inject
-    lateinit var walletProvider: WalletProvider
 
 
     fun generateRecoveryPhrase(): List<Pair<Int, String>> {

@@ -14,6 +14,13 @@
     <string name="send">Send</string>
     <string name="receive">Receive</string>
     <string name="congratulations">Congratulations</string>
-    <string name="your_ton_wallet_has_just_been_created_only_you_control_it_to_be_able_to_always_have_access_to_it_please_write_down_secret_words_and_set_up_a_secure_passcode">Your TON wallet has just been created. Only you control it. \n \n To be able to always have access to it, please write down secret words and set up a secure passcode.</string>
+    <string name="your_ton_wallet_has_just_been_created_only_you_control_it_to_be_able_to_always_have_access_to_it_please_write_down_secret_words_and_set_up_a_secure_passcode">Your TON wallet has just been created. Only you control it. \n \n</string>
     <string name="proceed">Proceed</string>
+    <string name="_24_secret_words_title">24 Secret Words</string>
+    <string name="secret_words_content">You can restore access to your wallet by entering the 24 words you wrote down when creating the wallet.</string>
+    <string name="too_bad">Too Bad!</string>
+    <string name="enter_24_secret_words">Enter 24 secret words</string>
+    <string name="create_a_new_empty_wallet">Create a new empty wallet</string>
+    <string name="forget_secret_words_content">Without the secret words you can\'t restore access to the wallet.</string>
+    <string name="i_don_t_have_them">I don\'t have them.</string>
 </resources>
