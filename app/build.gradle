@@ -147,6 +147,7 @@ dependencies {
 
     // Zxing
     implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
     // CameraX
     implementation "androidx.camera:camera-camera2:${camerax_version}"
