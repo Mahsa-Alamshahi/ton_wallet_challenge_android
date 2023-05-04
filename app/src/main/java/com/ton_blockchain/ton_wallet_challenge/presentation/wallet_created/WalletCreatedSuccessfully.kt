@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
+import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
@@ -72,6 +73,10 @@ fun WalletCreatedSuccessfullyScreen(navController: NavController){
 
             ButtonComponent(text = stringResource(R.string.proceed)) {
                 navController.navigate("main_screen")
+            }
+
+            TextButtonComponent(text = stringResource(R.string.set_passcode)) {
+                navController.navigate("passcode_screen")
             }
         }
     }

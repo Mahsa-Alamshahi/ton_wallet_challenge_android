@@ -10,6 +10,7 @@ import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_dialog_screen.ForgetPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.import_existing_wallet_screen.ImportExistingWalletScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen.PasscodeScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.RecoveryPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen.TestPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedSuccessfullyScreen
@@ -69,6 +70,11 @@ fun Navigation() {
             route = TonWalletScreens.ForgetPhraseScreen.route
         ) { entry ->
             ForgetPhraseScreen(navController)
+        }
+  composable(
+            route = TonWalletScreens.PasscodeScreen.route
+        ) { entry ->
+            PasscodeScreen(navController)
         }
 
     }

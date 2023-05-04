@@ -35,7 +35,7 @@ fun MainScreen(navController: NavHostController) {
                 .fillMaxWidth()
                 .background(Color.Black)
         ) {
-            BalanceView()
+            BalanceView(navController)
         }
 
         Column(

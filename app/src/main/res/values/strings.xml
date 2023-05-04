@@ -23,4 +23,5 @@
     <string name="create_a_new_empty_wallet">Create a new empty wallet</string>
     <string name="forget_secret_words_content">Without the secret words you can\'t restore access to the wallet.</string>
     <string name="i_don_t_have_them">I don\'t have them.</string>
+    <string name="set_passcode">Set Passcode</string>
 </resources>
