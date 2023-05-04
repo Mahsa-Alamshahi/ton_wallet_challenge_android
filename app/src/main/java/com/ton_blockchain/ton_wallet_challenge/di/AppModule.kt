@@ -1,6 +1,7 @@
 package com.ton_blockchain.ton_wallet_challenge.di
 
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.DataProvider
+import com.ton_blockchain.ton_wallet_challenge.data.data_source.QrCodeHelper
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.RecoveryPhraseProvider
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.WalletProvider
 import com.ton_blockchain.ton_wallet_challenge.data.repository.RecoveryPhraseRepositoryImpl
@@ -33,4 +34,7 @@ object AppModule {
 
     @Provides
     fun provideWalletProvider(): WalletProvider = WalletProvider()
+
+    @Provides
+    fun provideQrCodeHelper(): QrCodeHelper = QrCodeHelper()
 }
