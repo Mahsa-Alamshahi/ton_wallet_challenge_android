@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-internal fun TextFieldComponent(index: Int, phraseList: ArrayList<Pair<Int, String>>) {
+internal fun TextFieldComponent(
+    index: Int,
+    phraseList: ArrayList<Pair<Int, String>>
+) {
 
     var textState by rememberSaveable { mutableStateOf("") }
 
@@ -61,6 +64,7 @@ internal fun TextFieldComponent(index: Int, phraseList: ArrayList<Pair<Int, Stri
 
             )
     }
+
 }
 
 fun generateList(index: Int, phrase: String, phraseList: ArrayList<Pair<Int, String>>) {
@@ -69,8 +73,3 @@ fun generateList(index: Int, phrase: String, phraseList: ArrayList<Pair<Int, Str
 }
 
 
-fun showText(phraseList: ArrayList<Pair<Int, String>>) {
-    for (i in 0..23) {
-        println(println(" ${phraseList.get(i)}   "))
-    }
-}

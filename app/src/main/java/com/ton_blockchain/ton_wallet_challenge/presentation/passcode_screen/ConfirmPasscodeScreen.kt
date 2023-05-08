@@ -1,5 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -18,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,7 +28,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.orhanobut.hawk.Hawk
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.Constants.HAWK_PASSCODE
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TopBarComponent
@@ -34,10 +38,10 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.componen
 
 
 @Composable
-fun PasscodeScreen(navController: NavController) {
+fun ConfirmPasscodeScreen(navController: NavController, passcode: String) {
 
-    var passcodeTextState by rememberSaveable { mutableStateOf("") }
-
+    val context = LocalContext.current
+    var confirmPasscodeTextState by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -59,7 +63,7 @@ fun PasscodeScreen(navController: NavController) {
             )
 
             TextComponent(
-                text = stringResource(R.string.set_a_passcode),
+                text = "Confirm a Passcode",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -69,7 +73,7 @@ fun PasscodeScreen(navController: NavController) {
             )
 
             TextField(
-                value = passcodeTextState,
+                value = confirmPasscodeTextState,
                 modifier = Modifier.padding(64.dp),
                 textStyle = TextStyle.Default.copy(fontSize = 16.sp),
                 colors = TextFieldDefaults.textFieldColors(
@@ -77,7 +81,7 @@ fun PasscodeScreen(navController: NavController) {
                     focusedIndicatorColor = Color.Blue
                 ),
                 onValueChange = {
-                    passcodeTextState = it
+                    confirmPasscodeTextState = it
                 },
                 label = {
                     Text("passcode ")
@@ -93,12 +97,15 @@ fun PasscodeScreen(navController: NavController) {
             )
 
 
-
             ButtonComponent(text = stringResource(R.string.confirm)) {
-                navController.navigate("confirm_passcode_screen/$passcodeTextState")
+                if (confirmPasscodeTextState == passcode) {
+                    Hawk.put(HAWK_PASSCODE, passcode)
+                    navController.navigate("ready_to_go_screen")
+                } else {
+                    Toast.makeText(context, "Passcode does not match.", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
     }
-
 }

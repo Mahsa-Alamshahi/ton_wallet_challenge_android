@@ -12,3 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val Blue80 = Color(0xFF006EEF)
+val Blue88 = Color(0x800174FC)
+val Black88 = Color(0xB0050505)

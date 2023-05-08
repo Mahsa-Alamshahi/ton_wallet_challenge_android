@@ -24,4 +24,10 @@
     <string name="forget_secret_words_content">Without the secret words you can\'t restore access to the wallet.</string>
     <string name="i_don_t_have_them">I don\'t have them.</string>
     <string name="set_passcode">Set Passcode</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_the_4_digits_in_the_passcode">Enter the 4 digits in the passcode.</string>
+    <string name="set_a_passcode">Set a Passcode</string>
+    <string name="ready_to_go">Ready To Go!</string>
+    <string name="you_are_all_set">You are all set. Now you have a wallet that only you control - directly, without middlemen or bankers.</string>
+    <string name="view_my_wallet">View My Wallet</string>
 </resources>

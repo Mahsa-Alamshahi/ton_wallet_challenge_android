@@ -4,8 +4,10 @@ import com.ton_blockchain.ton_wallet_challenge.data.data_source.DataProvider
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.QrCodeHelper
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.RecoveryPhraseProvider
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.WalletProvider
+import com.ton_blockchain.ton_wallet_challenge.data.repository.ImportExistingWalletRepositoryImpl
 import com.ton_blockchain.ton_wallet_challenge.data.repository.RecoveryPhraseRepositoryImpl
 import com.ton_blockchain.ton_wallet_challenge.data.repository.TestPhraseRepositoryImpl
+import com.ton_blockchain.ton_wallet_challenge.domain.repository.ImportExistingWalletRepository
 import com.ton_blockchain.ton_wallet_challenge.domain.repository.RecoveryPhraseRepository
 import com.ton_blockchain.ton_wallet_challenge.domain.repository.TestPhraseRepository
 import dagger.Module
@@ -23,7 +25,7 @@ object AppModule {
         RecoveryPhraseRepositoryImpl(recoveryPhraseProvider)
 
 
-     @Provides
+    @Provides
     fun provideTestPhraseRepository(dataProvider: DataProvider): TestPhraseRepository =
         TestPhraseRepositoryImpl(dataProvider)
 
@@ -37,4 +39,13 @@ object AppModule {
 
     @Provides
     fun provideQrCodeHelper(): QrCodeHelper = QrCodeHelper()
+
+
+    @Provides
+    fun provideImportExistingWalletRepository(
+        recoveryPhraseProvider: RecoveryPhraseProvider,
+        walletProvider: WalletProvider
+    ): ImportExistingWalletRepository =
+        ImportExistingWalletRepositoryImpl(recoveryPhraseProvider, walletProvider)
+
 }
