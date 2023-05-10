@@ -1,8 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +16,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,25 +30,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreenViewModel
+import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendScreen
+import kotlinx.coroutines.launch
 
 @Composable
-fun BalanceView(navController: NavController) {
+fun BalanceView(navController: NavController, viewModel: MainScreenViewModel) {
 
+    val sheetState = rememberSheetState()
+    val scope = rememberCoroutineScope()
 
 
     Column {
-
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.End
         ) {
-            IconButton(onClick = {}, modifier = Modifier.padding(8.dp)) {
-                Image(painter = painterResource(id = R.drawable.baseline_qr_code_scanner_24),
-                    contentDescription = null,
-                    modifier = Modifier.clickable { })
-            }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                navController.navigate(TonWalletScreens.SettingScreen.route)
+            }) {
                 Icon(
                     imageVector = Icons.Outlined.Settings,
                     contentDescription = "",
@@ -65,7 +67,7 @@ fun BalanceView(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "TON btc",
+                text = stringResource(R.string.your_balance),
                 textAlign = TextAlign.Center, color = Color.White
             )
 
@@ -74,11 +76,12 @@ fun BalanceView(navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                AnimationLoader(R.raw.wallet_crystal, 36.dp
-                    ,36.dp)
+                AnimationLoader(
+                    R.raw.wallet_crystal, 36.dp, 36.dp
+                )
 
                 Text(
-                    text = "5633.225222",
+                    text = viewModel.showBalance(),
                     textAlign = TextAlign.Center, color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 32.sp
@@ -90,7 +93,8 @@ fun BalanceView(navController: NavController) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)) {
+                .padding(bottom = 8.dp)
+        ) {
 
             OutlinedButton(
                 onClick = { },
@@ -116,7 +120,12 @@ fun BalanceView(navController: NavController) {
 
 
             OutlinedButton(
-                onClick = { },
+                onClick = {
+                    scope.launch {
+                        sheetState.show()
+                    }
+////                            sheetState.animateTo(ModalBottomSheetValue.Expanded)
+                },
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 4.dp, end = 8.dp),
@@ -138,6 +147,9 @@ fun BalanceView(navController: NavController) {
             }
 
         }
-
     }
+
+    SendScreen(sheetState = sheetState, scope = scope, navController)
 }
+
+

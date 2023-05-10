@@ -12,12 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.BalanceView
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.TransactionListItem
 
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen(navController: NavHostController, viewModel: MainScreenViewModel = hiltViewModel()) {
 
     Column(
         Modifier
@@ -35,7 +36,7 @@ fun MainScreen(navController: NavHostController) {
                 .fillMaxWidth()
                 .background(Color.Black)
         ) {
-            BalanceView(navController)
+            BalanceView(navController, viewModel)
         }
 
         Column(
@@ -50,7 +51,7 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(2.dp)
             ) {
-                item {
+                items(10) {
                     TransactionListItem()
                 }
             }

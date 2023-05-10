@@ -19,8 +19,10 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
 fun AnimationLoader(
-    resId: Int, width: Dp = 100.dp, height: Dp = 100.dp, alignment: Alignment = Alignment.Center,
+    resId: Int, width: Dp = 100.dp, height: Dp = 100.dp,
+    alignment: Alignment = Alignment.Center,
     enableMergePaths: Boolean = true,
+
 ) {
 
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(resId))

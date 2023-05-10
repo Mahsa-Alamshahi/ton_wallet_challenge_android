@@ -30,4 +30,9 @@
     <string name="ready_to_go">Ready To Go!</string>
     <string name="you_are_all_set">You are all set. Now you have a wallet that only you control - directly, without middlemen or bankers.</string>
     <string name="view_my_wallet">View My Wallet</string>
+    <string name="your_balance">Your Balance:</string>
+    <string name="send_toncoins">Send Toncoins</string>
+    <string name="comment_optional">Comment (optional)</string>
+    <string name="amount">Amount</string>
+    <string name="balance">"balance: "</string>
 </resources>
