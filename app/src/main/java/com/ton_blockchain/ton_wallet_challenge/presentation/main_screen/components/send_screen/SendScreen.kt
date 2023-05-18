@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.presentation.send_screen
+package com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -102,7 +102,7 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                     },
                     trailingIcon = {
                         IconButton(onClick = {
-                            navController.navigate(TonWalletScreens.ScanQrCodeScreen.route)
+                            navController.navigate(TonWalletScreens.QrCodeScannerScreen.route)
                         }) {
                             Icon(
                                 imageVector = ImageVector.vectorResource(id = R.drawable.baseline_qr_code_scanner_24),

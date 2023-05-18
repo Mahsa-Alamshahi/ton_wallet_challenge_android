@@ -5,12 +5,7 @@ import javax.inject.Inject
 
 class ImportExistingWalletUseCase @Inject constructor(private val importExistingWalletRepository: ImportExistingWalletRepository) {
 
-    operator fun invoke(phraseList: MutableList<String>) {
-//        var mnemonicString = ""
-//        phraseList.forEach { phrase ->
-//            mnemonicString += "$phrase "
-//        }
-//        mnemonicString.dropLast(1)
-        importExistingWalletRepository.generateWallet(phraseList)
+    operator fun invoke(phraseList: MutableList<String>): Boolean {
+        return importExistingWalletRepository.generateWallet(phraseList)
     }
 }

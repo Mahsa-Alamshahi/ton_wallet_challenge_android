@@ -48,4 +48,5 @@ object AppModule {
     ): ImportExistingWalletRepository =
         ImportExistingWalletRepositoryImpl(recoveryPhraseProvider, walletProvider)
 
+
 }

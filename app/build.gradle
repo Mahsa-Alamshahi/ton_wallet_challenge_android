@@ -4,8 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-//    id 'com.google.devtools.ksp'
-//    id("com.google.devtools.ksp") version "1.8.0-1.0.8"
 }
 
 kapt {
@@ -69,6 +67,9 @@ android {
         ]
     }
 
+    configurations.all {
+        exclude group: "com.github.walleth"
+    }
 
 //    kotlin {
 //        sourceSets.main {
@@ -91,6 +92,14 @@ android {
 ext {
     multidex_version = "2.0.1"
     camerax_version = "1.2.2"
+    lottie_compose_version = "6.0.0"
+    logger_version = "2.2.0"
+    gson_version = "2.10.1"
+    hawk_version = "2.0.1"
+    zxing_version = "3.4.1"
+    zxing_embedded = "4.3.0"
+    composed_barcodes_version = "1.1.1"
+    barcode_scanning_version ="17.1.0"
 }
 
 dependencies {
@@ -115,21 +124,27 @@ dependencies {
     // compose-paging
     implementation 'androidx.paging:paging-compose:1.0.0-alpha16'
 
+
     // compose-navigation
     implementation "androidx.navigation:navigation-compose:2.5.2"
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
+
 
     // Lottie Compose
-    implementation 'com.airbnb.android:lottie-compose:6.0.0'
+    implementation "com.airbnb.android:lottie-compose:$lottie_compose_version"
 
+
+    // View
     implementation('com.google.accompanist:accompanist-flowlayout:0.19.0')
+    implementation 'com.github.raheemadamboev:pin-lock-compose:1.0.1'
 
-    implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
 
     // Multidex
     implementation "androidx.multidex:multidex:$multidex_version"
 
+
     // Dependency Injection hilt
-    implementation("com.google.dagger:hilt-android:2.45")
+    implementation "com.google.dagger:hilt-android:2.45"
     kapt("com.google.dagger:hilt-android-compiler:2.45")
     implementation("androidx.hilt:hilt-work:1.0.0")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
@@ -138,26 +153,28 @@ dependencies {
 
 
     // Logger
-    implementation 'com.orhanobut:logger:2.2.0'
+    implementation "com.orhanobut:logger:$logger_version"
+
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.google.code.gson:gson:$gson_version"
 
+
+    // Wallet
     implementation('org.bitcoinj:bitcoinj-core:0.16.2')
+    implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
+    implementation 'com.github.walleth:kethereum:0.85.7'
+//  implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
+
 
     // Hawk
-    implementation "com.orhanobut:hawk:2.0.1"
+    implementation "com.orhanobut:hawk:$hawk_version"
+
 
     // Zxing
-    implementation 'com.google.zxing:core:3.4.1'
-    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    implementation "com.google.zxing:core:$zxing_version"
+    implementation "com.journeyapps:zxing-android-embedded:$zxing_embedded"
 
-    // Pin Lock
-    implementation 'com.github.raheemadamboev:pin-lock-compose:1.0.1'
-
-//    implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
-
-//    implementation 'com.github.walleth:kethereum:0.84.2'
 
     // CameraX
     implementation "androidx.camera:camera-camera2:$camerax_version"
@@ -166,4 +183,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-material:0.31.1-alpha"
 
 
+    // Barcode Scanner
+    implementation "com.google.mlkit:barcode-scanning:$barcode_scanning_version"
+    implementation "com.simonsickle:composed-barcodes:$composed_barcodes_version"
 }

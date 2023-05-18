@@ -29,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.orhanobut.logger.Logger
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
@@ -38,13 +40,16 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.componen
 
 
 @Composable
-fun ImportExistingWalletScreen(navController: NavController, viewModel: ImportExistingWalletViewModel = hiltViewModel()) {
+fun ImportExistingWalletScreen(
+    navController: NavController, viewModel: ImportExistingWalletViewModel = hiltViewModel()
+) {
 
     val n = 24
 
-    val myLists: MutableList<String> = (1..n).map {"" }.toMutableList()
-    val textFieldInitValues = List(myLists.size){ "" }
-    val valueStateList = remember { mutableStateListOf<String>().apply { addAll(textFieldInitValues) } }
+    val myLists: MutableList<String> = (1..n).map { "" }.toMutableList()
+    val textFieldInitValues = List(myLists.size) { "" }
+    val valueStateList =
+        remember { mutableStateListOf<String>().apply { addAll(textFieldInitValues) } }
 
 
     Scaffold(
@@ -63,26 +68,24 @@ fun ImportExistingWalletScreen(navController: NavController, viewModel: ImportEx
             verticalArrangement = Arrangement.Center
         ) {
 
-                AnimationLoader(resId = R.raw.wallet_note)
+            AnimationLoader(resId = R.raw.wallet_note)
 
-                TextComponent(
-                    text = stringResource(R.string._24_secret_words_title),
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .wrapContentWidth(align = Alignment.CenterHorizontally),
-                )
-                TextComponent(
-                    text = stringResource(R.string.secret_words_content),
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .wrapContentWidth(align = Alignment.CenterHorizontally),
-                )
+            TextComponent(
+                text = stringResource(R.string._24_secret_words_title),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .wrapContentWidth(align = Alignment.CenterHorizontally),
+            )
+            TextComponent(
+                text = stringResource(R.string.secret_words_content),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .wrapContentWidth(align = Alignment.CenterHorizontally),
+            )
 
             myLists.forEachIndexed { index, item ->
-
-//                var textState by rememberSaveable { mutableStateOf("") }
 
                 Row(
                     modifier = Modifier
@@ -99,42 +102,33 @@ fun ImportExistingWalletScreen(navController: NavController, viewModel: ImportEx
                             .weight(4f),
                         textStyle = TextStyle.Default.copy(fontSize = 16.sp),
                         onValueChange = {
-                         valueStateList[index] = it
+                            valueStateList[index] = it
                         },
 
                         colors = TextFieldDefaults.textFieldColors(
-                            containerColor = Color.White,
-                            focusedIndicatorColor = Color.Blue
+                            containerColor = Color.White, focusedIndicatorColor = Color.Blue
                         ),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Done
+                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Done
                         ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                            }
-                        ),
-                        )
+                        keyboardActions = KeyboardActions(onDone = {}),
+                    )
                 }
 
             }
-                ButtonComponent(text = stringResource(R.string.done)) {
-//                          navController.navigate("wallet_created_screen")
-                     viewModel.generateWalletAddress(valueStateList)
-
-
+            ButtonComponent(text = stringResource(R.string.done)) {
+                if (viewModel.generateWalletAddress(valueStateList)) {
+                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
+                    Logger.d("TRUE")
+                } else {
+                    Logger.d("FALSE")
                 }
+            }
 
-                TextButtonComponent(text = stringResource(R.string.i_don_t_have_them)) {
-                    navController.navigate("forget_phrase_screen")
-                }
+            TextButtonComponent(text = stringResource(R.string.i_don_t_have_them)) {
+                navController.navigate("forget_phrase_screen")
+            }
 
         }
-    }
-}
-
-fun showText(phraseList: ArrayList<Pair<Int, String>>) {
-    for (i in 0..23) {
-        println(println(" ${phraseList.get(i)}   "))
     }
 }

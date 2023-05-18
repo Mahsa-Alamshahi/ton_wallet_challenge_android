@@ -15,11 +15,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.orhanobut.hawk.Hawk
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.Constants.HAWK_WALLET
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
+import org.bitcoinj.wallet.Wallet
 
 
 @Composable
@@ -58,8 +61,10 @@ fun WalletCreatedSuccessfullyScreen(navController: NavController){
                 modifier = Modifier.padding(top = 12.dp, start = 4.dp, end = 4.dp)
             )
 
+
+
             TextComponent(
-                text = "Wallet Address: \n Hawk.get<Address>(HAWK_WALLET_ADDRESS).toString()",
+                text = "Wallet Address: \n ${getWalletAddress()}",
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 12.dp, start = 4.dp, end = 4.dp)
             )
@@ -80,5 +85,9 @@ fun WalletCreatedSuccessfullyScreen(navController: NavController){
             }
         }
     }
+}
 
+fun getWalletAddress(): String {
+    var wallet: Wallet? = Hawk.get(HAWK_WALLET, null)
+    return wallet?.currentReceiveAddress().toString()
 }

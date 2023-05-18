@@ -33,7 +33,7 @@ import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreenViewModel
-import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.SendScreen
 import kotlinx.coroutines.launch
 
 @Composable

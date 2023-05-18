@@ -15,6 +15,7 @@ class RecoveryPhraseProvider @Inject constructor(private var walletProvider: Wal
     fun generateRecoveryPhrase(): List<Pair<Int, String>> {
 
         val recoveryPhraseList = mutableListOf<Pair<Int, String>>()
+        var seedCodeList: ArrayList<String> = ArrayList()
         val mnemonicCode: Mnemonics.MnemonicCode =
             Mnemonics.MnemonicCode(Mnemonics.WordCount.COUNT_24)
         var index = 1
@@ -22,11 +23,12 @@ class RecoveryPhraseProvider @Inject constructor(private var walletProvider: Wal
         for (word in mnemonicCode) {
             mnemonicString += "$word "
             recoveryPhraseList.add(Pair(index, word))
+            seedCodeList.add(word)
             index++
         }
         val seedByteArray: ByteArray = mnemonicCode.toSeed()
         mnemonicString = mnemonicString.dropLast(1)
-//        walletProvider.generateWalletAddress(mnemonicString, seedByteArray)
+        walletProvider.generateWallet(seedCodeList, seedByteArray)
         return recoveryPhraseList
     }
 
@@ -41,7 +43,8 @@ class RecoveryPhraseProvider @Inject constructor(private var walletProvider: Wal
         Log.d("mnemoniic","Verifying seed ${seedWords.size}")
 
         seedWords.forEachIndexed {index, phrase ->
-            println(phrase + "$index") }
+            println(phrase + "$index")
+        }
         var isSeedPhraseValid = false
         try {
             MnemonicCode.INSTANCE.check(seedWords)

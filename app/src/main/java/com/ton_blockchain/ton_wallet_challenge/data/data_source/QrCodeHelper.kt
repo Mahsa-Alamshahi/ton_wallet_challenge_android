@@ -9,7 +9,7 @@ class QrCodeHelper {
 
 
     fun generateQrCode(content: String): Bitmap {
-        val content = content    // "bitcoin:3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy"
+        val content = "bitcoin:3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy"
         val writer = QRCodeWriter()
         val bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 512, 512)
         val width = bitMatrix.width

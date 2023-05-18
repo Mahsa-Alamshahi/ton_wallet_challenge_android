@@ -17,18 +17,19 @@ import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_dialog_screen.ForgetPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.import_existing_wallet_screen.ImportExistingWalletScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.SendScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.components.QrCodeScanner
 import com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen.ConfirmPasscodeScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen.PasscodeScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.pin_screen.PinScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.ready_to_go_screen.ReadyToGoScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.RecoveryPhraseScreen
-import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendScreen
-import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.components.ScanQrCode
 import com.ton_blockchain.ton_wallet_challenge.presentation.setting_screen.SettingScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen.TestPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedSuccessfullyScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.WalletScreen
 
+@androidx.camera.core.ExperimentalGetImage
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
 fun Navigation() {
@@ -45,8 +46,7 @@ fun Navigation() {
 
 
         NavHost(
-            navController = navController,
-            startDestination = TonWalletScreens.MainScreen.route
+            navController = navController, startDestination = TonWalletScreens.WalletScreen.route
         ) {
 
             composable(route = TonWalletScreens.WalletScreen.route) {
@@ -121,9 +121,9 @@ fun Navigation() {
                 SettingScreen(navController)
             }
             composable(
-                route = TonWalletScreens.ScanQrCodeScreen.route
+                route = TonWalletScreens.QrCodeScannerScreen.route
             ) { entry ->
-                ScanQrCode()
+                QrCodeScanner()
             }
         }
     }
