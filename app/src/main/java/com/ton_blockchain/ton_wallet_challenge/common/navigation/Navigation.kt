@@ -46,7 +46,7 @@ fun Navigation() {
 
 
         NavHost(
-            navController = navController, startDestination = TonWalletScreens.RecoveryPhraseScreen.route
+            navController = navController, startDestination = TonWalletScreens.WalletScreen.route
         ) {
 
             composable(route = TonWalletScreens.WalletScreen.route) {

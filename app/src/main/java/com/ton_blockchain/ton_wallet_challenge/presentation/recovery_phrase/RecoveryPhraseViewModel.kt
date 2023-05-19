@@ -15,8 +15,13 @@ class RecoveryPhraseViewModel @Inject constructor(
             recoveryPhraseGeneratorUseCase()
 
 
-
-
+    fun createListOfWords(mnemonic: List<Pair<Int, String>>): List<String>{
+        var words: ArrayList<String> = ArrayList()
+        mnemonic.forEach {element ->
+          words.add(element.second)
+        }
+        return words
+    }
 }
 
 

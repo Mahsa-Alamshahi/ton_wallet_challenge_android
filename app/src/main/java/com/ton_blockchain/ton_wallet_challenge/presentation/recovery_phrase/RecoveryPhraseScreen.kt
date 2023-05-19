@@ -1,12 +1,14 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,13 +43,15 @@ fun RecoveryPhraseScreen(
 
 
     var isLoading by remember { mutableStateOf(true) }
-    val state: MutableState<List<Pair<Int, String>>> = remember { mutableStateOf(emptyList<Pair<Int, String>>()) }
+    val state: MutableState<List<Pair<Int, String>>> =
+        remember { mutableStateOf(emptyList<Pair<Int, String>>()) }
 
 
     LaunchedEffect(Unit) {
         isLoading = true
-        val result = withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             state.value = viewModel.generateRecoveryPhrase()
+            println("*********************** " + state.value)
             isLoading = false
         }
     }
@@ -67,7 +71,6 @@ fun RecoveryPhraseScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-
             AnimationLoader(resId = R.raw.wallet_note)
 
             TextComponent(
@@ -75,12 +78,20 @@ fun RecoveryPhraseScreen(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
+
             TextComponent(
                 text = stringResource(R.string.recovery_phrase_content),
             )
 
             if (isLoading) {
-                CircularProgressIndicator()
+
+                Row(modifier = Modifier
+                    .padding(32.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center) {
+                    AnimationLoader(width = 64.dp, height = 64.dp, resId = R.raw.wallet_sync)
+                }
+
             } else {
                 FlowRow(Modifier.padding(12.dp)) {
                     PhraseListComponent(state.value)
@@ -89,8 +100,8 @@ fun RecoveryPhraseScreen(
 
             ButtonComponent(text = stringResource(R.string.done)) {
                 val list = mutableListOf<String>()
-//                list.addAll(state.value)
-                val phraseListParcelable = PhraseList(list)
+                list.addAll(viewModel.createListOfWords(state.value))
+                val phraseListParcelable = PhraseList(state.value)
                 navController.navigate("test_phrase_screen/$phraseListParcelable")
             }
 

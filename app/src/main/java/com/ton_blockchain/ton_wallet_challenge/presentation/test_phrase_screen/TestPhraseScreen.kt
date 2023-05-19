@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TopBarComponent
@@ -99,7 +100,6 @@ fun TestPhraseScreen(
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-//                    callback()
                     }
                 ),
             )
@@ -154,11 +154,11 @@ fun TestPhraseScreen(
                 inputPhraseList.add(0, Pair(randomNumberList[0], firstTextState))
                 inputPhraseList.add(1, Pair(randomNumberList[1], secondTextState))
                 inputPhraseList.add(2, Pair(randomNumberList[2], thirdTextState))
-//                if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
-//                    navController.navigate(TonWalletScreens.MainScreen.route)
-//                } else {
-//                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
-//                }
+                if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
+                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
+                } else {
+                    navController.navigate(TonWalletScreens.ForgetPhraseScreen.route)
+                }
             }
 
         }
