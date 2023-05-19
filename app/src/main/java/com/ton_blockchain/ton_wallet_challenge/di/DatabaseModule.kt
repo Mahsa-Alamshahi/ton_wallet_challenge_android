@@ -15,14 +15,11 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-
     @Provides
     fun provideDatabase(@ApplicationContext application: Context): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME)
             .allowMainThreadQueries()
             .build()
     }
-
-
 
 }
