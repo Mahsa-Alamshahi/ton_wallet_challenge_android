@@ -154,11 +154,11 @@ fun TestPhraseScreen(
                 inputPhraseList.add(0, Pair(randomNumberList[0], firstTextState))
                 inputPhraseList.add(1, Pair(randomNumberList[1], secondTextState))
                 inputPhraseList.add(2, Pair(randomNumberList[2], thirdTextState))
-                if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
-                    navController.navigate("main_screen")
-                } else {
-                    navController.navigate("wallet_created_screen")
-                }
+//                if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
+//                    navController.navigate(TonWalletScreens.MainScreen.route)
+//                } else {
+//                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
+//                }
             }
 
         }

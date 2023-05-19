@@ -9,6 +9,8 @@ class TestPhraseRepositoryImpl @Inject constructor(private val dataProvider: Dat
     TestPhraseRepository {
 
     override fun generateRandomNumber(): List<Int> = dataProvider.generateRandomNumber()
+
+
     override fun checkRandomPhrase(
         phraseList: List<Pair<Int, String>>,
         inputPhrase: MutableList<Pair<Int, String>>

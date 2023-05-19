@@ -4,6 +4,6 @@ import android.net.Uri
 import com.google.gson.Gson
 
 
-data class PhraseList(var phrases: List<Pair<Int, String>>) {
+data class PhraseList(var phrases: List<String>) {
     override fun toString(): String = Uri.encode(Gson().toJson(this))
 }

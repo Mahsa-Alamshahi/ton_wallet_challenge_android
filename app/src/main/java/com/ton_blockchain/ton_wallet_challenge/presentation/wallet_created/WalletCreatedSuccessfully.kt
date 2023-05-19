@@ -15,14 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.orhanobut.hawk.Hawk
 import com.ton_blockchain.ton_wallet_challenge.R
-import com.ton_blockchain.ton_wallet_challenge.common.Constants.HAWK_WALLET
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
-import org.bitcoinj.wallet.Wallet
+
 
 
 @Composable
@@ -77,17 +76,18 @@ fun WalletCreatedSuccessfullyScreen(navController: NavController){
         ) {
 
             ButtonComponent(text = stringResource(R.string.proceed)) {
-                navController.navigate("main_screen")
+                navController.navigate(TonWalletScreens.MainScreen.route)
             }
 
             TextButtonComponent(text = stringResource(R.string.set_passcode)) {
-                navController.navigate("passcode_screen")
+                navController.navigate(TonWalletScreens.PasscodeScreen.route)
             }
         }
     }
 }
 
 fun getWalletAddress(): String {
-    var wallet: Wallet? = Hawk.get(HAWK_WALLET, null)
-    return wallet?.currentReceiveAddress().toString()
+//    var wallet: Wallet? = Hawk.get(HAWK_WALLET, null)
+//    return wallet?.currentReceiveAddress().toString()
+    return ""
 }

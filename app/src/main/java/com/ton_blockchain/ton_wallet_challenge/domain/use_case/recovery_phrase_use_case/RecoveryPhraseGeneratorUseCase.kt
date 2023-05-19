@@ -5,5 +5,7 @@ import javax.inject.Inject
 
 class RecoveryPhraseGeneratorUseCase @Inject constructor(private val recoveryPhraseRepository: RecoveryPhraseRepository) {
 
-    operator fun invoke(): List<Pair<Int, String>> = recoveryPhraseRepository.generateRecoveryPhrase()
+    suspend operator fun invoke(): MutableList<Pair<Int, String>> =
+            recoveryPhraseRepository.generateRecoveryPhrase()
+
 }

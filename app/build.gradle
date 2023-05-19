@@ -62,9 +62,7 @@ android {
     kotlinOptions {
         freeCompilerArgs += ["-Xjvm-default=all"]
         allWarningsAsErrors = false
-        freeCompilerArgs += [
-                '-opt-in=androidx.compose.material3.ExperimentalMaterial3Api'
-        ]
+        freeCompilerArgs += ['-opt-in=androidx.compose.material3.ExperimentalMaterial3Api']
     }
 
     configurations.all {
@@ -99,7 +97,8 @@ ext {
     zxing_version = "3.4.1"
     zxing_embedded = "4.3.0"
     composed_barcodes_version = "1.1.1"
-    barcode_scanning_version ="17.1.0"
+    barcode_scanning_version = "17.1.0"
+    ton_version = "0.2.15"
 }
 
 dependencies {
@@ -161,9 +160,9 @@ dependencies {
 
 
     // Wallet
-    implementation('org.bitcoinj:bitcoinj-core:0.16.2')
-    implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
-    implementation 'com.github.walleth:kethereum:0.85.7'
+//    implementation('org.bitcoinj:bitcoinj-core:0.16.2')
+//    implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
+//    implementation 'com.github.walleth:kethereum:0.85.7'
 //  implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
 
 
@@ -186,4 +185,9 @@ dependencies {
     // Barcode Scanner
     implementation "com.google.mlkit:barcode-scanning:$barcode_scanning_version"
     implementation "com.simonsickle:composed-barcodes:$composed_barcodes_version"
+
+    // Ton
+    implementation "org.ton:ton-kotlin:$ton_version"
+
+    implementation 'androidx.compose.runtime:runtime-livedata:1.0.0-beta01'
 }

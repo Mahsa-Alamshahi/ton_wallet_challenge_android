@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
@@ -29,11 +30,8 @@ fun ForgetPhraseScreen(
 ) {
 
     Card(
-        //shape = MaterialTheme.shapes.medium,
         shape = RoundedCornerShape(8.dp),
-        // modifier = modifier.size(280.dp, 240.dp)
         modifier = Modifier.padding(10.dp, 5.dp, 10.dp, 10.dp),
-//        elevation = 8.dp
     ) {
         Column(
             modifier = Modifier
@@ -81,7 +79,7 @@ fun ForgetPhraseScreen(
 
 
                 TextButtonComponent(  text = stringResource(R.string.create_a_new_empty_wallet)) {
-                    navController.navigate("recovery_phrase_screen")
+                    navController.navigate(TonWalletScreens.RecoveryPhraseScreen.route)
                 }
 
             }

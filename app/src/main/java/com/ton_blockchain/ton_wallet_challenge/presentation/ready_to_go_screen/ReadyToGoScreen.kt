@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
@@ -61,7 +62,7 @@ fun ReadyToGoScreen(navController: NavController) {
         ) {
 
             ButtonComponent(text = stringResource(R.string.view_my_wallet)) {
-                navController.navigate("main_screen")
+                navController.navigate(TonWalletScreens.MainScreen.route)
             }
 
         }

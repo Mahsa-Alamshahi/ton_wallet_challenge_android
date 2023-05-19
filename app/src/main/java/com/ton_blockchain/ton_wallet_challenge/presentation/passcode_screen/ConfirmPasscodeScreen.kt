@@ -31,6 +31,7 @@ import androidx.navigation.NavController
 import com.orhanobut.hawk.Hawk
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.Constants.HAWK_PASSCODE
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TopBarComponent
@@ -100,7 +101,7 @@ fun ConfirmPasscodeScreen(navController: NavController, passcode: String) {
             ButtonComponent(text = stringResource(R.string.confirm)) {
                 if (confirmPasscodeTextState == passcode) {
                     Hawk.put(HAWK_PASSCODE, passcode)
-                    navController.navigate("ready_to_go_screen")
+                    navController.navigate(TonWalletScreens.ReadyToGoScreen.route)
                 } else {
                     Toast.makeText(context, "Passcode does not match.", Toast.LENGTH_SHORT).show()
                 }

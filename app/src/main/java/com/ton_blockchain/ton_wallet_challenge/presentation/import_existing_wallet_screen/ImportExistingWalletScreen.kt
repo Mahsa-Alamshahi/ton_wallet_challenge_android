@@ -117,16 +117,16 @@ fun ImportExistingWalletScreen(
 
             }
             ButtonComponent(text = stringResource(R.string.done)) {
-                if (viewModel.generateWalletAddress(valueStateList)) {
+//                if (viewModel.generateWalletAddress(valueStateList)) {
                     navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
                     Logger.d("TRUE")
-                } else {
-                    Logger.d("FALSE")
-                }
+//                } else {
+//                    Logger.d("FALSE")
+//                }
             }
 
             TextButtonComponent(text = stringResource(R.string.i_don_t_have_them)) {
-                navController.navigate("forget_phrase_screen")
+                navController.navigate(TonWalletScreens.ForgetPhraseScreen.route)
             }
 
         }

@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
@@ -64,11 +65,11 @@ fun WalletScreen(navController: NavController) {
         ) {
 
             ButtonComponent(text = stringResource(R.string.create_my_wallet)) {
-                navController.navigate("recovery_phrase_screen")
+                navController.navigate(TonWalletScreens.RecoveryPhraseScreen.route)
             }
 
             TextButtonComponent(text = stringResource(R.string.import_existing_wallet)) {
-                navController.navigate("import_existing_wallet_screen")
+                navController.navigate(TonWalletScreens.ImportExistingWalletScreen.route)
             }
         }
     }
