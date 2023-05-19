@@ -26,8 +26,5 @@ class WalletProvider {
 //        println("Seed words are: " + Joiner.on(" ").join(seed2.mnemonicCode))
     }
 
-
-
-
 }
 

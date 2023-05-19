@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_dialog_screen
+package com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -14,7 +14,7 @@ import com.google.accompanist.navigation.material.bottomSheet
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
 import com.google.gson.Gson
 import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
-import com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_dialog_screen.ForgetPhraseScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_screen.ForgetPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.import_existing_wallet_screen.ImportExistingWalletScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.SendScreen

@@ -5,8 +5,7 @@ import org.ton.mnemonic.Mnemonic
 import javax.inject.Inject
 
 
-class RecoveryPhraseProvider @Inject constructor(private var walletProvider: WalletProvider){
-
+class RecoveryPhraseProvider @Inject constructor(private var walletProvider: WalletProvider) {
 
 
     suspend fun generateRecoveryPhrase(): MutableList<Pair<Int, String>> {
@@ -28,41 +27,21 @@ class RecoveryPhraseProvider @Inject constructor(private var walletProvider: Wal
     }
 
 
-
-
-
     fun isSeedValid(seedWords: List<String>): Boolean {
-        Log.d("mnemoniic","Verifying seed ${seedWords.size}")
+        Log.d("mnemoniic", "Verifying seed ${seedWords.size}")
 
-        seedWords.forEachIndexed {index, phrase ->
+        seedWords.forEachIndexed { index, phrase ->
             println(phrase + "$index")
         }
         var isSeedPhraseValid = false
         try {
             Mnemonic.isValid(seedWords)
-//            MnemonicCode.INSTANCE.check(seedWords)
             isSeedPhraseValid = true
         } catch (e: Exception) {
-
+            isSeedPhraseValid = false
         }
-//        } catch (e: MnemonicException.MnemonicChecksumException) {
-//            Log.d("Checksum error in seed:  {}", "MnemonicChecksumException " + e.message.toString())
-//        } catch (e: MnemonicException.MnemonicWordException) {
-//            Log.d("Unknown words in seed:  {}", "MnemonicWordException "+ e.message.toString())
-//        } catch (e: MnemonicException) {
-//            Log.d("Error verifying seed: {}", "MnemonicException " + e.message.toString())
-//        }
-//        if (isSeedPhraseValid && seed != null) {
-//            Log.d("ffff","Typed seed does not match the generated one.")
-//            isSeedPhraseValid = false
-//        }
         return isSeedPhraseValid
     }
 
-
-    fun generateSeedFromExistingMnemonic(preExistingPhraseString: String){
-//        val preExistingPhraseString = "scheme spot photo card baby mountain device kick cradle pact join borrow"
-//       var seed = MnemonicCode(Mnemonics.WordCount.COUNT_24, preExistingPhraseString).toSeed()
-    }
 
 }

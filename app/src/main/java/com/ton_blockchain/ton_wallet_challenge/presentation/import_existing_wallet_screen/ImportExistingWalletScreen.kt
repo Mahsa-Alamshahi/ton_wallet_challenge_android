@@ -31,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.orhanobut.logger.Logger
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.Constants.RECOVERY_PHRASE_COUNT
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
@@ -44,9 +45,8 @@ fun ImportExistingWalletScreen(
     navController: NavController, viewModel: ImportExistingWalletViewModel = hiltViewModel()
 ) {
 
-    val n = 24
 
-    val myLists: MutableList<String> = (1..n).map { "" }.toMutableList()
+    val myLists: MutableList<String> = (1..RECOVERY_PHRASE_COUNT).map { "" }.toMutableList()
     val textFieldInitValues = List(myLists.size) { "" }
     val valueStateList =
         remember { mutableStateListOf<String>().apply { addAll(textFieldInitValues) } }
@@ -117,12 +117,13 @@ fun ImportExistingWalletScreen(
 
             }
             ButtonComponent(text = stringResource(R.string.done)) {
-//                if (viewModel.generateWalletAddress(valueStateList)) {
+                if (viewModel.generateWalletAddress(valueStateList)) {
                     navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
                     Logger.d("TRUE")
-//                } else {
-//                    Logger.d("FALSE")
-//                }
+                } else {
+                    navController.navigate(TonWalletScreens.ForgetPhraseScreen.route)
+                    Logger.d("FALSE")
+                }
             }
 
             TextButtonComponent(text = stringResource(R.string.i_don_t_have_them)) {
