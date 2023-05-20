@@ -44,7 +44,7 @@ fun RecoveryPhraseScreen(
 
     var isLoading by remember { mutableStateOf(true) }
     val state: MutableState<List<Pair<Int, String>>> =
-        remember { mutableStateOf(emptyList<Pair<Int, String>>()) }
+        remember { mutableStateOf(emptyList()) }
 
 
     LaunchedEffect(Unit) {

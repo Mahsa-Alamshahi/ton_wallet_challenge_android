@@ -1,5 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.import_existing_wallet_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +20,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.orhanobut.logger.Logger
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.Constants.RECOVERY_PHRASE_COUNT
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
@@ -45,7 +47,7 @@ fun ImportExistingWalletScreen(
     navController: NavController, viewModel: ImportExistingWalletViewModel = hiltViewModel()
 ) {
 
-
+    val focusManager = LocalFocusManager.current
     val myLists: MutableList<String> = (1..RECOVERY_PHRASE_COUNT).map { "" }.toMutableList()
     val textFieldInitValues = List(myLists.size) { "" }
     val valueStateList =
@@ -63,6 +65,7 @@ fun ImportExistingWalletScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxWidth()
+                .background(Color.White)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -109,20 +112,21 @@ fun ImportExistingWalletScreen(
                             containerColor = Color.White, focusedIndicatorColor = Color.Blue
                         ),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Done
+                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
                         ),
-                        keyboardActions = KeyboardActions(onDone = {}),
-                    )
+                        keyboardActions = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Down)
+                            },
+                    ),)
                 }
 
             }
             ButtonComponent(text = stringResource(R.string.done)) {
                 if (viewModel.generateWalletAddress(valueStateList)) {
-                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
-                    Logger.d("TRUE")
+                    navController.navigate(TonWalletScreens.WalletCreatedScreen.route)
                 } else {
                     navController.navigate(TonWalletScreens.ForgetPhraseScreen.route)
-                    Logger.d("FALSE")
                 }
             }
 

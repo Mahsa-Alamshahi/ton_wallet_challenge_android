@@ -26,13 +26,13 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.ready_to_go_screen.R
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.RecoveryPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.setting_screen.SettingScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen.TestPhraseScreen
-import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedSuccessfullyScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.WalletScreen
 
 @androidx.camera.core.ExperimentalGetImage
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
-fun Navigation() {
+fun Navigation(startDestination: String) {
 
 
     val sheetState = rememberSheetState()
@@ -46,7 +46,7 @@ fun Navigation() {
 
 
         NavHost(
-            navController = navController, startDestination = TonWalletScreens.WalletScreen.route
+            navController = navController, startDestination = startDestination
         ) {
 
             composable(route = TonWalletScreens.WalletScreen.route) {
@@ -74,9 +74,9 @@ fun Navigation() {
                 MainScreen(navController)
             }
             composable(
-                route = TonWalletScreens.WalletCreatedSuccessfullyScreen.route
+                route = TonWalletScreens.WalletCreatedScreen.route
             ) { entry ->
-                WalletCreatedSuccessfullyScreen(navController)
+                WalletCreatedScreen(navController)
             }
             composable(
                 route = TonWalletScreens.ImportExistingWalletScreen.route

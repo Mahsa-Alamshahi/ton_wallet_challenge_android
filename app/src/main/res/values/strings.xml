@@ -35,4 +35,6 @@
     <string name="comment_optional">Comment (optional)</string>
     <string name="amount">Amount</string>
     <string name="balance">"balance: "</string>
+    <string name="confirm_a_passcode">Confirm a Passcode</string>
+    <string name="enter_your_passcode">Enter your passcode.</string>
 </resources>

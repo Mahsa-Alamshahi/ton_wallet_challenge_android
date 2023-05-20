@@ -16,3 +16,5 @@ val Blue80 = Color(0xFF006EEF)
 val Blue88 = Color(0x800174FC)
 val DarkBlue = Color(0xFF000096)
 val Black88 = Color(0xB0050505)
+
+val White001 = Color.White

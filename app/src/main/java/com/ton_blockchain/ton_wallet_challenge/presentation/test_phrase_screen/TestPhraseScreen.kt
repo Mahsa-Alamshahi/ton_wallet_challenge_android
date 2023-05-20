@@ -155,7 +155,7 @@ fun TestPhraseScreen(
                 inputPhraseList.add(1, Pair(randomNumberList[1], secondTextState))
                 inputPhraseList.add(2, Pair(randomNumberList[2], thirdTextState))
                 if (viewModel.checkRandomPhrase(phraseList!!.phrases, inputPhraseList)) {
-                    navController.navigate(TonWalletScreens.WalletCreatedSuccessfullyScreen.route)
+                    navController.navigate(TonWalletScreens.WalletCreatedScreen.route)
                 } else {
                     navController.navigate(TonWalletScreens.ForgetPhraseScreen.route)
                 }

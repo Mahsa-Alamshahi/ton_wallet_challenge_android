@@ -28,9 +28,18 @@ android {
             useSupportLibrary true
         }
 
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+//            }
+//        }
+
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
             }
         }
     }
@@ -128,8 +137,8 @@ dependencies {
     // compose-navigation
     implementation "androidx.navigation:navigation-compose:2.5.2"
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
-
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.0-beta01'
+
 
     // Lottie Compose
     implementation "com.airbnb.android:lottie-compose:$lottie_compose_version"
@@ -138,7 +147,6 @@ dependencies {
     // View
     implementation('com.google.accompanist:accompanist-flowlayout:0.19.0')
     implementation 'com.github.raheemadamboev:pin-lock-compose:1.0.1'
-
 
     // Multidex
     implementation "androidx.multidex:multidex:$multidex_version"
@@ -162,11 +170,10 @@ dependencies {
 
 
     // Wallet
-//    implementation('org.bitcoinj:bitcoinj-core:0.16.2')
-//    implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
-//    implementation 'com.github.walleth:kethereum:0.85.7'
-//  implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
-
+    implementation('org.bitcoinj:bitcoinj-core:0.16.2')
+    // implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
+    // implementation 'com.github.walleth:kethereum:0.85.7'
+    // implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
 
     // Hawk
     implementation "com.orhanobut:hawk:$hawk_version"
@@ -188,14 +195,25 @@ dependencies {
     implementation "com.google.mlkit:barcode-scanning:$barcode_scanning_version"
     implementation "com.simonsickle:composed-barcodes:$composed_barcodes_version"
 
+
     // Ton
     implementation "org.ton:ton-kotlin:$ton_version"
 
-    // Room
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.compose.runtime:runtime-livedata:1.2.1"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
 
+    // Room
+    implementation "androidx.compose.runtime:runtime-livedata:1.4.3"
+    implementation "androidx.room:room-runtime:2.5.1"
+    implementation "androidx.room:room-ktx:2.5.1"
+    implementation "androidx.room:room-paging:2.5.1"
+    annotationProcessor "androidx.room:room-compiler:2.5.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    kapt "androidx.room:room-compiler:2.5.1"
+
+
+    // OptView
+    implementation 'com.github.mukeshsolanki.android-otpview-pinview:otpview-compose:3.1.0'
+
+
+    // Biometric
+    implementation "androidx.biometric:biometric-ktx:1.2.0-alpha05"
 }
