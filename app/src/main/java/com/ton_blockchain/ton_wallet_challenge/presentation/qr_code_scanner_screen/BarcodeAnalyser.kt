@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen
+package com.ton_blockchain.ton_wallet_challenge.presentation.qr_code_scanner_screen
 
 import android.content.Context
 import android.widget.Toast
@@ -15,8 +15,6 @@ class BarcodeAnalyser(
     val callback: (String) -> Unit,
     val context: Context
 ) : ImageAnalysis.Analyzer {
-
-
 
 
     override fun analyze(imageProxy: ImageProxy) {

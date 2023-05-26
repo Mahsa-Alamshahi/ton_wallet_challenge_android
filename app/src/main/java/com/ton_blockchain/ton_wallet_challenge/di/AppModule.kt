@@ -1,9 +1,9 @@
 package com.ton_blockchain.ton_wallet_challenge.di
 
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.DataProvider
-import com.ton_blockchain.ton_wallet_challenge.data.data_source.QrCodeHelper
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.RecoveryPhraseProvider
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.WalletProvider
+import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.dao.BalanceDao
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.dao.WalletDao
 import com.ton_blockchain.ton_wallet_challenge.data.repository.DatabaseRepositoryImpl
 import com.ton_blockchain.ton_wallet_challenge.data.repository.ImportExistingWalletRepositoryImpl
@@ -39,12 +39,9 @@ object AppModule {
 
 
     @Provides
-    fun provideWalletProvider(@Nullable walletDao: WalletDao?): WalletProvider = WalletProvider(
-        walletDao!!
+    fun provideWalletProvider(@Nullable walletDao: WalletDao?, @Nullable balanceDao: BalanceDao?): WalletProvider = WalletProvider(
+        walletDao!!, balanceDao!!
     )
-
-    @Provides
-    fun provideQrCodeHelper(): QrCodeHelper = QrCodeHelper()
 
 
     @Provides
@@ -56,7 +53,7 @@ object AppModule {
 
 
     @Provides
-    fun provideDatabaseRepository(@Nullable walletDao: WalletDao?): DatabaseRepository =
-       DatabaseRepositoryImpl(walletDao!!)
+    fun provideDatabaseRepository(@Nullable walletDao: WalletDao?, @Nullable balanceDao: BalanceDao?): DatabaseRepository =
+       DatabaseRepositoryImpl(walletDao!!, balanceDao!!)
 
 }

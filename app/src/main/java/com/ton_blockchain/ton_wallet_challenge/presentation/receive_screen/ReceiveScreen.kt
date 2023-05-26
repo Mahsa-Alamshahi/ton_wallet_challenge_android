@@ -1,4 +1,4 @@
-package com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen
+package com.ton_blockchain.ton_wallet_challenge.presentation.receive_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,13 +10,13 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,32 +33,45 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.Constants
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity.Balance
+import com.ton_blockchain.ton_wallet_challenge.domain.model.dto.TransferObject
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-
 
 @Composable
-fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: NavController) {
+fun ReceiveScreen(navController: NavController){
 
 
-    var value by remember {
+    var walletAddress by remember {
         mutableStateOf("")
     }
 
-    if (sheetState.isVisible) {
-        ModalBottomSheet(
-            sheetState = sheetState,
-            onDismissRequest = {
-                scope.launch {
-                    sheetState.hide()
-                }
-            },
-        ) {
+    var amount by remember {
+        mutableStateOf("")
+    }
+
+    var comment by remember {
+        mutableStateOf("")
+    }
+
+
+    val state: MutableState<List<Balance>> =
+        remember { mutableStateOf(emptyList()) }
+
+
+
+
+    val qrScannerResult = navController.currentBackStackEntry
+        ?.savedStateHandle
+        ?.getLiveData<String>(Constants.QR_READER_RESULT_KEY)?.observeAsState()
+
+
+
+
             Column(
                 modifier = Modifier
                     .background(Color.White)
@@ -96,9 +109,17 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                     colors = TextFieldDefaults.textFieldColors(
                         containerColor = Color.White, focusedIndicatorColor = Color.Blue
                     ),
-                    value = value,
+                    value = walletAddress,
                     onValueChange = { newText ->
-                        value = newText
+                        qrScannerResult?.value?.let { qrResult ->
+                            if (walletAddress != "") {
+                                walletAddress = qrResult
+                            } else {
+                                walletAddress = newText
+                            }
+                        } ?: run {
+                            walletAddress = newText
+                        }
                     },
                     trailingIcon = {
                         IconButton(onClick = {
@@ -137,9 +158,9 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                     colors = TextFieldDefaults.textFieldColors(
                         containerColor = Color.White, focusedIndicatorColor = Color.Blue
                     ),
-                    value = value,
+                    value = amount,
                     onValueChange = { newText ->
-                        value = newText
+                        amount = newText
                     },
                     trailingIcon = {
                         AnimationLoader(
@@ -155,13 +176,14 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                     },
                     placeholder = { Text(text = "0.0", color = Color.DarkGray) })
 
-
-                TextComponent(
-                    stringResource(R.string.balance),
-                    fontWeight = FontWeight.SemiBold,
-                    textColor = Blue80,
-                    modifier = Modifier.padding(16.dp)
-                )
+                if (state.value.isNotEmpty()) {
+                    TextComponent(
+                        stringResource(R.string.balance) + state.value[0].available,
+                        fontWeight = FontWeight.SemiBold,
+                        textColor = Blue80,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
 
 
                 TextField(modifier = Modifier
@@ -171,9 +193,9 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                     colors = TextFieldDefaults.textFieldColors(
                         containerColor = Color.White, focusedIndicatorColor = Color.Blue
                     ),
-                    value = value,
+                    value = comment,
                     onValueChange = { newText ->
-                        value = newText
+                        comment = newText
                     },
                     placeholder = {
                         Text(
@@ -181,8 +203,11 @@ fun SendScreen(sheetState: SheetState, scope: CoroutineScope, navController: Nav
                         )
                     })
 
-                ButtonComponent(text = stringResource(R.string.send_toncoins)) {}
+                ButtonComponent(text = stringResource(R.string.send_toncoins)) {
+                    TransferObject(walletAddress, amount, comment)
+                }
             }
-        }
-    }
+
+
+
 }

@@ -25,5 +25,17 @@ class ImportExistingWalletRepositoryImpl @Inject constructor(
             false
         }
     }
+
+    override fun restoreWallet(mnemonicList: MutableList<String>): Boolean {
+        Logger.d(recoveryPhraseProvider.isSeedValid(mnemonicList))
+        return if (recoveryPhraseProvider.isSeedValid(mnemonicList)) {
+            walletProvider.restoreWallet(mnemonicList)
+            println("SEED WORDS ARE VALID.1 YeeesSsssSSs")
+            true
+        } else {
+            println("SEED WORDS ARE VALID.2 NoooOoOoooOo")
+            false
+        }
+    }
 }
 

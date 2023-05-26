@@ -1,6 +1,5 @@
 package com.ton_blockchain.ton_wallet_challenge.common.navigation
 
-import androidx.compose.material3.rememberSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavType
@@ -8,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
+import com.dokar.sheets.rememberBottomSheetState
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
@@ -17,13 +18,15 @@ import com.ton_blockchain.ton_wallet_challenge.domain.model.PhraseList
 import com.ton_blockchain.ton_wallet_challenge.presentation.forget_phrase_screen.ForgetPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.import_existing_wallet_screen.ImportExistingWalletScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreen
-import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.SendScreen
-import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.components.QrCodeScanner
 import com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen.ConfirmPasscodeScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.passcode_screen.PasscodeScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.pin_screen.PinScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.qr_code_scanner_screen.QrCodeScannerScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.ready_to_go_screen.ReadyToGoScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.receive_screen.ReceiveScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.recovery_phrase.RecoveryPhraseScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendResultScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.setting_screen.SettingScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen.TestPhraseScreen
 import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_created.WalletCreatedScreen
@@ -35,7 +38,7 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.Wallet
 fun Navigation(startDestination: String) {
 
 
-    val sheetState = rememberSheetState()
+    val sheetState = rememberBottomSheetState()
     val scope = rememberCoroutineScope()
 
 
@@ -113,7 +116,7 @@ fun Navigation(startDestination: String) {
                 PinScreen(navController)
             }
             bottomSheet(TonWalletScreens.SendScreen.route) {
-                SendScreen(sheetState, scope, navController)
+                SendScreen(sheetState, navController)
             }
             composable(
                 route = TonWalletScreens.SettingScreen.route
@@ -123,7 +126,39 @@ fun Navigation(startDestination: String) {
             composable(
                 route = TonWalletScreens.QrCodeScannerScreen.route
             ) { entry ->
-                QrCodeScanner()
+                QrCodeScannerScreen(navController)
+            }
+            composable(
+                route = TonWalletScreens.ReceiveScreen.route
+            ) { entry ->
+                ReceiveScreen(navController)
+            }
+            composable(
+                route = TonWalletScreens.SendResultScreen.route,
+                arguments = listOf(
+                    navArgument("wallet_address") {
+                        type = NavType.StringType
+                        defaultValue = ""
+                    },
+                    navArgument("amount") {
+                        type = NavType.FloatType
+                        defaultValue = 0.0
+                    },
+                    navArgument("comment") {
+                        type = NavType.StringType
+                        defaultValue = ""
+                    },
+                ),
+                deepLinks = listOf(navDeepLink {
+                    uriPattern = "ton://transfer/{wallet_address}?amount={amount}&text={comment}"
+                }),
+            ) { backStackEntry ->
+                val walletAddress = backStackEntry.arguments?.getString("wallet_address")
+                val amount = backStackEntry.arguments?.getFloat("amount")
+                val comment = backStackEntry.arguments?.getString("comment")
+                SendResultScreen(
+                    navController, walletAddress.toString(), amount, comment.toString()
+                )
             }
         }
     }

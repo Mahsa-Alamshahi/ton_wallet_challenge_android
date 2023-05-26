@@ -7,5 +7,5 @@ class PhraseListArgType : JsonNavType<PhraseList>() {
 
     override fun fromJsonParse(value: String): PhraseList = Gson().fromJson(value, PhraseList::class.java)
 
-    override fun PhraseList.getJsonParse(): String  = Gson().toJson(this)
+    override fun PhraseList.getJsonParse(): String = Gson().toJson(this)
 }

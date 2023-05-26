@@ -6,6 +6,6 @@ import javax.inject.Inject
 class ImportExistingWalletUseCase @Inject constructor(private val importExistingWalletRepository: ImportExistingWalletRepository) {
 
     operator fun invoke(phraseList: MutableList<String>): Boolean {
-        return importExistingWalletRepository.generateWallet(phraseList)
+        return importExistingWalletRepository.restoreWallet(phraseList)
     }
 }

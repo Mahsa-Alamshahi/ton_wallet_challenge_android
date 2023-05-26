@@ -15,5 +15,7 @@ sealed class TonWalletScreens(val route: String) {
     object SendScreen : TonWalletScreens("send_screen")
     object SettingScreen : TonWalletScreens("setting_screen")
     object QrCodeScannerScreen : TonWalletScreens("scan_qr_code_screen")
+    object ReceiveScreen : TonWalletScreens("receive_screen")
+    object SendResultScreen : TonWalletScreens("send_result_screen")
 }
 

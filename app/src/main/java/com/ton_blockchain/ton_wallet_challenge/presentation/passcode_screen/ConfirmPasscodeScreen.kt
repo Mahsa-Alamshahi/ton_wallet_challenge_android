@@ -63,7 +63,7 @@ fun ConfirmPasscodeScreen(navController: NavController, passcode: String) {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(12.dp),
+                    .padding(12.dp).verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -104,8 +104,9 @@ fun ConfirmPasscodeScreen(navController: NavController, passcode: String) {
             Column(
                 modifier = Modifier
                     .padding(12.dp)
-                    .weight(.4f),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .weight(.4f).verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
 
 

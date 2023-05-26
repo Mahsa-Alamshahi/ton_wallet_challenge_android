@@ -1,7 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,16 +9,19 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "balance")
 data class Balance(
-    @PrimaryKey(autoGenerate = false)
-    @NonNull
-    @ColumnInfo(name = "id")
-    var id: Int,
+
     @ColumnInfo(name = "estimated")
-    var estimated: Float,
+    var estimated: String,
     @ColumnInfo(name = "available")
-    var available: Float,
+    var available: String,
     @ColumnInfo(name = "estimated_spendable")
-    var estimatedSpendable: Float,
+    var estimatedSpendable: String,
     @ColumnInfo(name = "available_spendable")
-    var availableSpendable: Float
-) : Parcelable
+    var availableSpendable: String
+
+) : Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var balanceId: Int = 0
+}

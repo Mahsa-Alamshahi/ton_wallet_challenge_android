@@ -40,7 +40,6 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.componen
 @Composable
 fun PinScreen(navController: NavController) {
 
-
     val context = LocalContext.current
     var passcodeTextState by remember { mutableStateOf("") }
 
@@ -105,10 +104,8 @@ fun PinScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center
         ) {
 
-            ButtonComponent(text = stringResource(R.string.confirm)) {}
-
-            IconButton(modifier = Modifier.padding(12.dp), onClick = {
-                if (passcodeTextState == Hawk.get(Constants.HAWK_PASSCODE, "")) {
+            ButtonComponent(text = stringResource(R.string.confirm)) {
+               if (passcodeTextState == Hawk.get(Constants.HAWK_PASSCODE, "")) {
                     navController.navigate(TonWalletScreens.MainScreen.route)
                 } else {
                     Toast.makeText(
@@ -117,6 +114,9 @@ fun PinScreen(navController: NavController) {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+
+            IconButton(modifier = Modifier.padding(12.dp), onClick = {
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_fingerprint_24),

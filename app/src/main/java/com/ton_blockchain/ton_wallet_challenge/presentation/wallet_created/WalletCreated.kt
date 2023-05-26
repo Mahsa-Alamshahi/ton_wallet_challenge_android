@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import com.orhanobut.hawk.Hawk
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.Constants
+import com.ton_blockchain.ton_wallet_challenge.common.Constants.HAWK_PASSCODE
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextButtonComponent
@@ -115,6 +116,7 @@ fun WalletCreatedScreen(
         ) {
 
             ButtonComponent(text = stringResource(R.string.proceed)) {
+                Hawk.put(HAWK_PASSCODE, "")
                 navController.navigate(TonWalletScreens.MainScreen.route)
             }
 

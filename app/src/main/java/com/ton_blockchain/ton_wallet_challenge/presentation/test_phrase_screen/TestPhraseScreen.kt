@@ -1,5 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.test_phrase_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -60,7 +61,7 @@ fun TestPhraseScreen(
 
         Column(
             modifier = Modifier
-                .padding(paddingValues)
+                .padding(paddingValues).background(Color.White)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

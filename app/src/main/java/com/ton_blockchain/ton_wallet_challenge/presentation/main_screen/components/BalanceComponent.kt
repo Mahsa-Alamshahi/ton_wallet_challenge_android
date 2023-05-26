@@ -16,9 +16,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,19 +33,38 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.dokar.sheets.rememberBottomSheetState
 import com.ton_blockchain.ton_wallet_challenge.R
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
+import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity.Balance
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreenViewModel
-import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.send_screen.SendScreen
+import com.ton_blockchain.ton_wallet_challenge.presentation.send_screen.SendScreen
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 @Composable
-fun BalanceView(navController: NavController, viewModel: MainScreenViewModel) {
+fun BalanceView(navController: NavController, viewModel: MainScreenViewModel= hiltViewModel()) {
 
-    val sheetState = rememberSheetState()
+
+
     val scope = rememberCoroutineScope()
+    val sheetState = rememberBottomSheetState()
+
+
+    val state: MutableState<List<Balance>> =
+        remember { mutableStateOf(emptyList()) }
+
+
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            state.value = viewModel.getBalance()
+        }
+    }
 
 
     Column {
@@ -80,12 +104,15 @@ fun BalanceView(navController: NavController, viewModel: MainScreenViewModel) {
                     R.raw.wallet_crystal, 36.dp, 36.dp
                 )
 
+                if (state.value.isNotEmpty()) {
+
                 Text(
-                    text = viewModel.showBalance(),
+                    text = state.value[0].available,
                     textAlign = TextAlign.Center, color = Color.White,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 32.sp
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 40.sp
                 )
+                }
             }
         }
 
@@ -121,10 +148,7 @@ fun BalanceView(navController: NavController, viewModel: MainScreenViewModel) {
 
             OutlinedButton(
                 onClick = {
-                    scope.launch {
-                        sheetState.show()
-                    }
-////                            sheetState.animateTo(ModalBottomSheetValue.Expanded)
+               scope.launch { sheetState.expand() }
                 },
                 modifier = Modifier
                     .weight(1f)
@@ -148,8 +172,8 @@ fun BalanceView(navController: NavController, viewModel: MainScreenViewModel) {
 
         }
     }
+    SendScreen(sheetState = sheetState, navController)
 
-    SendScreen(sheetState = sheetState, scope = scope, navController)
 }
 
 

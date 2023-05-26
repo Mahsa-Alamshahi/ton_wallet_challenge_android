@@ -1,6 +1,7 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.camera.core.ExperimentalGetImage
@@ -17,6 +18,7 @@ import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreen
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Ton_wallet_challengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @ExperimentalGetImage
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -25,9 +27,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             Ton_wallet_challengeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
                     SetStartDestination()
                 }
             }
@@ -35,17 +37,18 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @ExperimentalGetImage
 @Composable
 fun SetStartDestination() {
-    if (Hawk.get(HAWK_PASSCODE, "") != null) {
-        Navigation(TonWalletScreens.PinScreen.route)
-    } else {
-        if (Hawk.get(HAWK_IS_WALLET_CREATED, false)) {
-            Navigation(TonWalletScreens.MainScreen.route)
+    if (Hawk.get(HAWK_IS_WALLET_CREATED, false)) {
+        if (Hawk.get(HAWK_PASSCODE, "") != "") {
+            Navigation(TonWalletScreens.PinScreen.route)
         } else {
-            Navigation(TonWalletScreens.WalletScreen.route)
+            Navigation(TonWalletScreens.MainScreen.route)
         }
+    } else {
+        Navigation(TonWalletScreens.WalletScreen.route)
     }
 
 }

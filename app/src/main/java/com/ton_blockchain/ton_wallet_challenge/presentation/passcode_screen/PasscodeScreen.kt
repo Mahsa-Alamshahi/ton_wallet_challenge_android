@@ -56,7 +56,7 @@ fun PasscodeScreen(navController: NavController) {
 
             Column(
                 modifier = Modifier.weight(1f)
-                    .padding(12.dp),
+                    .padding(12.dp).verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -93,8 +93,9 @@ fun PasscodeScreen(navController: NavController) {
             }
             Column(
                 modifier = Modifier
-                    .padding(12.dp).weight(.4f),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(12.dp).weight(.4f).verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
 
                 ButtonComponent(text = stringResource(R.string.confirm)) {

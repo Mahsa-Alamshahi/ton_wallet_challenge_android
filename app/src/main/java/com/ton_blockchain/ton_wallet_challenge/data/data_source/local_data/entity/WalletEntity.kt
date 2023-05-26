@@ -11,8 +11,6 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "wallet")
 data class WalletEntity(
 
-    @ColumnInfo(name = "balance")
-    var balance: String?,
 
     @ColumnInfo(name = "seed_birthday")
     var seedBirthday: String?,
@@ -34,6 +32,6 @@ data class WalletEntity(
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "id")
-    var id: Int = 0
+    var walletId: Int = 0
 
 }

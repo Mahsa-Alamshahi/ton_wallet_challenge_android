@@ -9,6 +9,4 @@ class RecoveryPhraseRepositoryImpl @Inject constructor(private val recoveryPhras
     override suspend fun generateRecoveryPhrase(): MutableList<Pair<Int, String>> =
       recoveryPhraseProvider.generateRecoveryPhrase()
 
-
-
 }
