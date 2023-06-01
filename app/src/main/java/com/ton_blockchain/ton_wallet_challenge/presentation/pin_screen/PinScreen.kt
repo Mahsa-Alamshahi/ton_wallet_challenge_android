@@ -35,19 +35,26 @@ import com.ton_blockchain.ton_wallet_challenge.common.Constants
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
+import com.ton_blockchain.ton_wallet_challenge.presentation.getActivity
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
+import com.ton_blockchain.ton_wallet_challenge.presentation.pin_screen.biometric_screen.showBiometricPrompt
+
 
 @Composable
 fun PinScreen(navController: NavController) {
+
+
 
     val context = LocalContext.current
     var passcodeTextState by remember { mutableStateOf("") }
 
 
+
     Column(
         modifier = Modifier
             .padding(12.dp)
-            .fillMaxSize().background(Color.White)
+            .fillMaxSize()
+            .background(Color.White)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -105,18 +112,17 @@ fun PinScreen(navController: NavController) {
         ) {
 
             ButtonComponent(text = stringResource(R.string.confirm)) {
-               if (passcodeTextState == Hawk.get(Constants.HAWK_PASSCODE, "")) {
+                if (passcodeTextState == Hawk.get(Constants.HAWK_PASSCODE, "")) {
                     navController.navigate(TonWalletScreens.MainScreen.route)
                 } else {
                     Toast.makeText(
-                        context,
-                        "The passcode you entered is not correct.",
-                        Toast.LENGTH_SHORT
+                        context, "The passcode you entered is not correct.", Toast.LENGTH_SHORT
                     ).show()
                 }
             }
 
             IconButton(modifier = Modifier.padding(12.dp), onClick = {
+                showBiometricPrompt(context.getActivity()!!, navController)
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_fingerprint_24),
@@ -125,7 +131,13 @@ fun PinScreen(navController: NavController) {
             }
         }
     }
+
+
 }
+
+
+
+
 
 
 

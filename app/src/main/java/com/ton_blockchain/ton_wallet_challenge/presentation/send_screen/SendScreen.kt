@@ -44,7 +44,6 @@ import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity.Balance
-import com.ton_blockchain.ton_wallet_challenge.domain.model.dto.TransferObject
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.MainScreenViewModel
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 import kotlinx.coroutines.Dispatchers
@@ -72,8 +71,7 @@ fun SendScreen(
     }
 
 
-    val state: MutableState<List<Balance>> =
-        remember { mutableStateOf(emptyList()) }
+    val state: MutableState<List<Balance>> = remember { mutableStateOf(emptyList()) }
 
 
     LaunchedEffect(Unit) {
@@ -82,9 +80,10 @@ fun SendScreen(
         }
     }
 
-    val qrScannerResult = navController.currentBackStackEntry
-        ?.savedStateHandle
-        ?.getLiveData<String>(QR_READER_RESULT_KEY)?.observeAsState()
+    val qrScannerResult =
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                QR_READER_RESULT_KEY
+            )?.observeAsState()
 
 
     if (sheetState.visible) {
@@ -223,7 +222,7 @@ fun SendScreen(
                     })
 
                 ButtonComponent(text = stringResource(R.string.send_toncoins)) {
-                    TransferObject(walletAddress, amount, comment)
+                    navController.navigate(TonWalletScreens.SendResultScreen.route + "/${walletAddress}/${amount}/${comment}")
                 }
             }
         }

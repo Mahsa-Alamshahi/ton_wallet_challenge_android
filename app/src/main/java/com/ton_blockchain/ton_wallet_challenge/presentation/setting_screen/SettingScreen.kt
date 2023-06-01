@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import com.simonsickle.compose.barcodes.Barcode
 import com.simonsickle.compose.barcodes.BarcodeType
 import com.ton_blockchain.ton_wallet_challenge.R
+import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TopBarComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity.WalletEntity
@@ -117,7 +118,7 @@ fun SettingScreen(navController: NavController, viewModel: SettingViewModel = hi
                             },
                             label = {
                                 Text(
-                                    text = "Wallet Address: \n \n ${state.value[0].address}",
+                                    text = "Wallet Address: \n ${state.value[0].address}",
                                     color = Blue80,
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -126,10 +127,12 @@ fun SettingScreen(navController: NavController, viewModel: SettingViewModel = hi
                 }
 
                 OutlinedButton(
-                    onClick = { },
+                    onClick = {
+                              navController.navigate(TonWalletScreens.PasscodeScreen.route)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 8.dp, end = 4.dp),
+                        .padding(16.dp),
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color.Blue),
                     colors = ButtonDefaults.outlinedButtonColors(

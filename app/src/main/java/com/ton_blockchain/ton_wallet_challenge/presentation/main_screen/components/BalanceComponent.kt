@@ -19,11 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -124,7 +122,9 @@ fun BalanceView(navController: NavController, viewModel: MainScreenViewModel= hi
         ) {
 
             OutlinedButton(
-                onClick = { },
+                onClick = {
+                          navController.navigate(TonWalletScreens.ReceiveScreen.route)
+                },
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp, end = 4.dp),

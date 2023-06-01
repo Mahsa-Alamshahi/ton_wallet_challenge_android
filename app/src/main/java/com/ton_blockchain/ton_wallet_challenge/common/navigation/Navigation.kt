@@ -1,7 +1,6 @@
 package com.ton_blockchain.ton_wallet_challenge.common.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -39,7 +38,7 @@ fun Navigation(startDestination: String) {
 
 
     val sheetState = rememberBottomSheetState()
-    val scope = rememberCoroutineScope()
+//    val scope = rememberCoroutineScope()
 
 
     val bottomSheetNavigator = rememberBottomSheetNavigator()
@@ -134,7 +133,7 @@ fun Navigation(startDestination: String) {
                 ReceiveScreen(navController)
             }
             composable(
-                route = TonWalletScreens.SendResultScreen.route,
+                route = TonWalletScreens.SendResultScreen.route+ "/{wallet_address}/{amount}/{comment}",
                 arguments = listOf(
                     navArgument("wallet_address") {
                         type = NavType.StringType

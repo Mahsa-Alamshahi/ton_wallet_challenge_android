@@ -39,7 +39,6 @@ import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.theme.Blue80
 import com.ton_blockchain.ton_wallet_challenge.data.data_source.local_data.entity.Balance
-import com.ton_blockchain.ton_wallet_challenge.domain.model.dto.TransferObject
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
 
 @Composable
@@ -61,7 +60,6 @@ fun ReceiveScreen(navController: NavController){
 
     val state: MutableState<List<Balance>> =
         remember { mutableStateOf(emptyList()) }
-
 
 
 
@@ -93,7 +91,7 @@ fun ReceiveScreen(navController: NavController){
                 }
 
                 TextComponent(
-                    text = stringResource(R.string.send_toncoins),
+                    text = stringResource(R.string.receive_toncoin),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     modifier = Modifier
@@ -134,7 +132,7 @@ fun ReceiveScreen(navController: NavController){
                     },
                     label = {
                         Text(
-                            text = "Reciptient wallet address",
+                            text = "Source wallet address",
                             color = Blue80,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -203,8 +201,9 @@ fun ReceiveScreen(navController: NavController){
                         )
                     })
 
-                ButtonComponent(text = stringResource(R.string.send_toncoins)) {
-                    TransferObject(walletAddress, amount, comment)
+                ButtonComponent(text = stringResource(R.string.receive)) {
+                    navController.navigate(TonWalletScreens.SendResultScreen.route + "/${walletAddress}/${amount}/${comment}")
+
                 }
             }
 
