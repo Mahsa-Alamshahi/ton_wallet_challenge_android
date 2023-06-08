@@ -1,6 +1,7 @@
 package com.ton_blockchain.ton_wallet_challenge.common.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,18 +35,15 @@ import com.ton_blockchain.ton_wallet_challenge.presentation.wallet_screen.Wallet
 @androidx.camera.core.ExperimentalGetImage
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
-fun Navigation(startDestination: String) {
+fun Navigation(startDestination: String, context: FragmentActivity) {
 
 
     val sheetState = rememberBottomSheetState()
-//    val scope = rememberCoroutineScope()
-
-
     val bottomSheetNavigator = rememberBottomSheetNavigator()
     val navController = rememberNavController(bottomSheetNavigator)
 
-    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
 
+    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
 
         NavHost(
             navController = navController, startDestination = startDestination
@@ -112,7 +110,7 @@ fun Navigation(startDestination: String) {
             composable(
                 route = TonWalletScreens.PinScreen.route
             ) { entry ->
-                PinScreen(navController)
+                PinScreen(navController, context)
             }
             bottomSheet(TonWalletScreens.SendScreen.route) {
                 SendScreen(sheetState, navController)

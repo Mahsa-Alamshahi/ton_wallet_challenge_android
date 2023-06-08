@@ -35,6 +35,7 @@ class WalletProvider @Inject constructor(private val walletDao: WalletDao, priva
 
         var ww = wallet?.walletTransactions
         println("seed *********** $wallet")
+        println("seed *********** ${wallet!!.walletTransactions}")
         println("*********************************************************************************")
 //        val seed2 = wallet.keyChainSeed
 //        println("Seed words are: " + Joiner.on(" ").join(seed2.mnemonicCode))

@@ -34,7 +34,7 @@ class MainActivity : FragmentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-                    SetStartDestination()
+                    SetStartDestination(this)
                 }
             }
         }
@@ -43,14 +43,14 @@ class MainActivity : FragmentActivity() {
 
 @ExperimentalGetImage
 @Composable
-fun SetStartDestination() {
+fun SetStartDestination(context: FragmentActivity) {
     if (Hawk.get(HAWK_IS_WALLET_CREATED, false)) {
         if (Hawk.get(HAWK_PASSCODE, "") != "") {
-            Navigation(TonWalletScreens.PinScreen.route)
+            Navigation(TonWalletScreens.PinScreen.route, context)
         } else {
-            Navigation(TonWalletScreens.MainScreen.route)
+            Navigation(TonWalletScreens.MainScreen.route, context)
         }
     } else {
-        Navigation(TonWalletScreens.WalletScreen.route)
+        Navigation(TonWalletScreens.WalletScreen.route, context)
     }
 }

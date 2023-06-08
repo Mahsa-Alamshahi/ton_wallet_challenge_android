@@ -180,7 +180,7 @@ dependencies {
     // Wallet
     implementation('org.bitcoinj:bitcoinj-core:0.16.2')
     // implementation "cash.z.ecc.android:kotlin-bip39:1.0.4"
-    // implementation 'com.github.walleth:kethereum:0.85.7'
+     implementation 'com.github.walleth:kethereum:0.85.7'
     // implementation 'com.github.horizontalsystems:bitcoin-kit-android:master-SNAPSHOT'
 
     // Hawk

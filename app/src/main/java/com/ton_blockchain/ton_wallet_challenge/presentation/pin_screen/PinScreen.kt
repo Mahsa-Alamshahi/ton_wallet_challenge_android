@@ -1,6 +1,7 @@
 package com.ton_blockchain.ton_wallet_challenge.presentation.pin_screen
 
 import android.widget.Toast
+import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,13 +21,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.mukeshsolanki.OTP_VIEW_TYPE_UNDERLINE
 import com.mukeshsolanki.OtpView
@@ -35,19 +38,25 @@ import com.ton_blockchain.ton_wallet_challenge.common.Constants
 import com.ton_blockchain.ton_wallet_challenge.common.navigation.TonWalletScreens
 import com.ton_blockchain.ton_wallet_challenge.common.ui.ButtonComponent
 import com.ton_blockchain.ton_wallet_challenge.common.ui.TextComponent
-import com.ton_blockchain.ton_wallet_challenge.presentation.getActivity
 import com.ton_blockchain.ton_wallet_challenge.presentation.main_screen.components.AnimationLoader
-import com.ton_blockchain.ton_wallet_challenge.presentation.pin_screen.biometric_screen.showBiometricPrompt
+import java.util.concurrent.Executor
+
+
+private lateinit var executor: Executor
+private lateinit var biometricPrompt: BiometricPrompt
+private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
 
 @Composable
-fun PinScreen(navController: NavController) {
+fun PinScreen(navController: NavController, context: FragmentActivity) {
 
 
-
-    val context = LocalContext.current
     var passcodeTextState by remember { mutableStateOf("") }
 
+
+    LaunchedEffect(key1 = Unit) {
+        showBiometricPrompt(context, navController)
+    }
 
 
     Column(
@@ -122,7 +131,7 @@ fun PinScreen(navController: NavController) {
             }
 
             IconButton(modifier = Modifier.padding(12.dp), onClick = {
-                showBiometricPrompt(context.getActivity()!!, navController)
+                showBiometricPrompt(context, navController)
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_fingerprint_24),
@@ -132,9 +141,57 @@ fun PinScreen(navController: NavController) {
         }
     }
 
-
 }
 
+fun showBiometricPrompt(context: FragmentActivity, navController: NavController) {
+
+    executor = ContextCompat.getMainExecutor(context)
+
+    biometricPrompt = BiometricPrompt(context, executor,
+        object : BiometricPrompt.AuthenticationCallback() {
+
+
+            override fun onAuthenticationError(
+                errorCode: Int,
+                errString: CharSequence
+            ) {
+                super.onAuthenticationError(errorCode, errString)
+
+                Toast.makeText(
+                    context,
+                    "Authentication error: $errString", Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+
+            override fun onAuthenticationSucceeded(
+                result: BiometricPrompt.AuthenticationResult
+            ) {
+                super.onAuthenticationSucceeded(result)
+                navController.navigate(
+                    TonWalletScreens.MainScreen.route
+                )
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(
+                    context, context.getString(R.string.your_fingerprint_does_not_match),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
+
+    promptInfo = BiometricPrompt.PromptInfo.Builder()
+        .setTitle(context.getString(R.string.biometric_log_in))
+        .setSubtitle(context.getString(R.string.log_in_using_your_biometric_credential))
+        .setNegativeButtonText(context.getString(R.string.cancel))
+        .build()
+
+
+    biometricPrompt.authenticate(promptInfo)
+
+}
 
 
 
